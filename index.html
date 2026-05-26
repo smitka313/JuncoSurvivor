@@ -59,6 +59,243 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
 .turnOverlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:10000}.turnOverlay.show{display:flex}.turnBox{background:white;padding:26px 34px;border-radius:20px;font-size:1.5rem;font-weight:900;box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:12000;display:none}.confetti.show{display:block}.confettiPiece{position:absolute;width:10px;height:10px;animation:fall 3s linear forwards}
 .pulse{animation:pulse 1s ease}.shake{animation:shake .5s ease}.glow{box-shadow:0 0 18px rgba(61,138,49,.6)}@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}@keyframes fall{from{transform:translateY(-10vh) rotate(0deg)}to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+.analysisOnly{display:none}
+body.analysisMode .analysisOnly{display:block}
+.reportGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+@media(max-width:760px){.reportGrid{grid-template-columns:1fr}}
+.reportCard{background:#fff;border:1px solid rgba(0,0,0,.08);border-left:7px solid var(--green);border-radius:14px;padding:12px}
+.reportCard h4{margin:0 0 6px;color:#0f5528}
+.whyText{display:none;margin-top:8px;background:#edf7ff;border-left:5px solid var(--blue);padding:8px;border-radius:10px}
+.whyText.open{display:block}
+.resultCode{background:#f7faf5;border:1px dashed #95aa8e;border-radius:12px;padding:10px;font-family:monospace;white-space:pre-wrap}
+
+
+.impactIndicators{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.impactTag{
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:.82rem;
+  font-weight:900;
+  border:1px solid rgba(0,0,0,.08);
+}
+.impactDown{
+  background:#fff0ec;
+  color:#8d2a1f;
+}
+.impactUp{
+  background:#e9f7ed;
+  color:#176b2a;
+}
+.impactNeutral{
+  background:#eef6ff;
+  color:#1769aa;
+}
+
+
+/* UX streamlining improvements */
+html{scroll-padding-top:90px}
+.habitat{
+  scroll-margin-top:90px;
+}
+.choice .buttons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+@media(max-width:700px){
+  .choice .buttons{
+    grid-template-columns:1fr;
+  }
+}
+.strategy{
+  min-height:58px;
+}
+.outcome{
+  max-height:340px;
+  overflow:auto;
+}
+.quickSummary{
+  position:sticky;
+  top:72px;
+  z-index:20;
+}
+.supportBox{
+  scroll-margin-top:90px;
+}
+#topActionBar{
+  transition:transform .2s ease;
+}
+#topActionBar.compact{
+  transform:scale(.96);
+}
+.fastHint{
+  background:#eef8ff;
+  border-left:6px solid var(--blue);
+  border-radius:12px;
+  padding:10px;
+  margin-top:10px;
+  font-weight:800;
+}
+.minimizeText .miniOutcome p{
+  font-size:.8rem;
+  line-height:1.15;
+}
+
+
+.extinctionOverlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.82);
+  display:none;align-items:center;justify-content:center;
+  z-index:15000;color:white;text-align:center;padding:20px;
+}
+.extinctionOverlay.show{display:flex}
+.extinctionBox{
+  background:#2a0f0f;border:4px solid #c64c3b;border-radius:24px;
+  padding:30px;max-width:700px;box-shadow:0 0 40px rgba(198,76,59,.7)
+}
+.extinctionBox h2{font-size:2rem;margin-top:0}
+.scenarioBanner{
+  margin-top:10px;padding:12px;border-radius:14px;
+  background:linear-gradient(90deg,#fff7d8,#eef8ff);
+  border-left:7px solid #f2a51a;font-weight:900;
+}
+.debriefGrid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px
+}
+@media(max-width:760px){.debriefGrid{grid-template-columns:1fr}}
+.debriefCard{
+  background:#fff;border:1px solid rgba(0,0,0,.08);
+  border-left:7px solid var(--green);border-radius:14px;padding:12px
+}
+.tokenBar{
+  display:flex;gap:8px;flex-wrap:wrap;margin-top:8px
+}
+.tokenBtn{
+  font-size:.82rem!important;padding:8px 10px!important;
+  box-shadow:none!important
+}
+.reactionAlert{
+  margin-top:8px;padding:10px;border-radius:12px;
+  background:#fff0ec;border-left:6px solid #c64c3b;font-weight:900;
+}
+
+
+.tokenBar{
+  margin-top:6px;
+}
+.tokenBtn{
+  min-height:42px;
+}
+.resourceBox{
+  margin-top:8px;
+}
+
+
+/* Restored UI flow improvements */
+.generationHero{
+  background:linear-gradient(90deg,#0f3970,#1d78bd);
+  color:white;
+  border-radius:18px;
+  padding:14px;
+  text-align:center;
+  margin-bottom:12px;
+  box-shadow:0 10px 24px rgba(0,0,0,.14);
+}
+.generationHero .bigGen{
+  font-size:clamp(1.5rem,4vw,2.5rem);
+  font-weight:1000;
+  letter-spacing:.04em;
+}
+.generationHero .scenario{
+  font-weight:900;
+  margin-top:4px;
+}
+.statusChips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:8px 0;
+}
+.statusChip{
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:.78rem;
+  font-weight:950;
+  border:1px solid rgba(0,0,0,.08);
+}
+.chipGood{background:#e9f7ed;color:#176b2a}
+.chipWarn{background:#fff6da;color:#8a6200}
+.chipBad{background:#fff0ec;color:#8d2a1f}
+.chipInfo{background:#eef6ff;color:#1769aa}
+.trendArrow{font-size:.9rem;font-weight:1000;margin-left:3px}
+.trendUp{color:#176b2a}
+.trendDown{color:#8d2a1f}
+.trendSame{color:#667}
+.tooltip{
+  border-bottom:1px dotted currentColor;
+  cursor:help;
+}
+.smartBarMessage{
+  text-align:center;
+  font-weight:950;
+  color:#0f3970;
+  margin-bottom:5px;
+}
+.floatingDataBtn{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  z-index:1000;
+  border-radius:999px;
+  padding:14px 18px !important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
+}
+@media(max-width:700px){
+  .floatingDataBtn{
+    bottom:10px;
+    right:10px;
+    padding:12px 14px !important;
+    font-size:.88rem !important;
+  }
+}
+.analysisDivider{
+  margin:20px 0 8px;
+  padding:14px;
+  border-radius:18px;
+  background:linear-gradient(90deg,#191f2f,#33415c);
+  color:white;
+  text-align:center;
+  font-weight:950;
+  letter-spacing:.04em;
+}
+body:not(.analysisMode) .analysisPanel{
+  display:none;
+}
+.analysisPanel{
+  border:3px solid #33415c;
+  border-radius:20px;
+  background:#f8fbff;
+  padding:10px;
+}
+.fastHint{
+  background:#eef8ff;
+  border-left:6px solid var(--blue);
+  border-radius:12px;
+  padding:10px;
+  margin-top:10px;
+  font-weight:800;
+}
+.replayButton{
+  background:linear-gradient(#f6b334,#d97904)!important;
+  color:#2d1800!important;
+}
+.progressiveHidden{display:none}
+body.gameStarted .progressiveHidden{display:block}
+
 </style>
 </head>
 <body>
@@ -66,8 +303,12 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
   <h1>🐦 Junco Survivor: Adaptation Challenge</h1>
   <p class="subtitle">A clean strategy game about natural selection, inherited boldness, allele frequency, CORT, resources, and survival.</p>
   <div class="topActions">
-    <button id="practiceButton" class="instructionButton">🎮 Practice Round Guide</button>
-    <button id="instructionsButton" class="instructionButton">📋 Student Instructions</button>
+    <button type="button" id="practiceButton" class="instructionButton">🎮 Practice Round Guide</button>
+    <button type="button" id="instructionsButton" class="instructionButton">📋 Student Instructions</button>
+  </div>
+  <div class="teacherToggleBox">
+    
+    <button type="button" id="newChallengeButton" class="instructionButton">🔄 New Challenge</button>
   </div>
 </header>
 
@@ -76,7 +317,7 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
 
 <div id="tutorialModal" class="modalOverlay">
   <div class="modalBox">
-    <div class="modalHeader"><h2>🎮 Practice Round: How to Play</h2><button id="skipTutorialButton" class="closeButton">Skip ✕</button></div>
+    <div class="modalHeader"><h2>🎮 Practice Round: How to Play</h2><button type="button" id="skipTutorialButton" class="closeButton">Skip ✕</button></div>
     <div class="modalContent">
       <div class="tutorialProgress" id="tutorialProgress">Step 1 of 6</div>
       <div class="tutorialStep active"><div class="tutorialCard"><h3>Step 1 — Your Mission</h3><p>Manage two junco populations: <strong>Urban UCSD</strong> and <strong>Mt. Laguna</strong>. Help them survive, reproduce, and adapt.</p></div></div>
@@ -86,9 +327,9 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
       <div class="tutorialStep"><div class="tutorialCard"><h3>Step 5 — Run the Generation</h3><p>Click <strong>Run Next Generation</strong>. Read the condition popup, then check resources, mood, badges, and the quick summary.</p></div></div>
       <div class="tutorialStep"><div class="tutorialCard"><h3>Step 6 — What to Watch For</h3><ul><li>Did bold or shy birds increase?</li><li>Did allele frequency change?</li><li>Did CORT go up or down?</li><li>Are resources in danger?</li></ul></div></div>
       <div class="tutorialNav">
-        <button id="prevTutorialButton" class="purple">← Back</button>
-        <button id="nextTutorialButton" class="blue">Next →</button>
-        <button id="finishTutorialButton" class="gold">Start Playing</button>
+        <button type="button" id="prevTutorialButton" class="purple">← Back</button>
+        <button type="button" id="nextTutorialButton" class="blue">Next →</button>
+        <button type="button" id="finishTutorialButton" class="gold">Start Playing</button>
       </div>
     </div>
   </div>
@@ -96,7 +337,7 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
 
 <div id="instructionsModal" class="modalOverlay">
   <div class="modalBox">
-    <div class="modalHeader"><h2>Student Instructions</h2><button id="closeInstructionsButton" class="closeButton">Close ✕</button></div>
+    <div class="modalHeader"><h2>Student Instructions</h2><button type="button" id="closeInstructionsButton" class="closeButton">Close ✕</button></div>
     <div class="modalContent">
       <div class="instructionCallout"><strong>Goal:</strong> Use evidence from the game to explain how different environments can change junco populations over generations.</div>
       <ol>
@@ -113,38 +354,47 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
 
 <div id="secretModal" class="modalOverlay">
   <div class="modalBox">
-    <div class="modalHeader"><h2 id="secretTitle">Secret Objective</h2><button id="closeSecretButton" class="closeButton">Close ✕</button></div>
+    <div class="modalHeader"><h2 id="secretTitle">Secret Objective</h2><button type="button" id="closeSecretButton" class="closeButton">Close ✕</button></div>
     <div class="modalContent"><div class="instructionCallout" id="secretText">Secret objective appears here.</div><p><strong>Keep it secret:</strong> Only your team should read this objective.</p></div>
   </div>
 </div>
 
 <div id="winModal" class="modalOverlay">
   <div class="modalBox">
-    <div class="modalHeader"><h2>🏆 Secret Objective Results</h2><button id="closeWinButton" class="closeButton">Close ✕</button></div>
+    <div class="modalHeader"><h2>🏆 Secret Objective Results</h2><button type="button" id="closeWinButton" class="closeButton">Close ✕</button></div>
     <div class="modalContent"><div id="winText" class="instructionCallout">Results appear here.</div><p><strong>Next:</strong> Use the data table, before/after comparison, and graph to explain what evidence supports the result.</p></div>
   </div>
 </div>
 
 <div id="conditionModal" class="modalOverlay">
   <div class="modalBox">
-    <div class="modalHeader"><h2>🌦️ This Generation's Conditions</h2><button id="closeConditionButton" class="closeButton">Continue ✕</button></div>
+    <div class="modalHeader"><h2>🌦️ This Generation's Conditions</h2><button type="button" id="closeConditionButton" class="closeButton">Continue ✕</button></div>
     <div class="modalContent">
       <div class="instructionCallout"><strong>Read before interpreting results:</strong> These conditions changed which strategy was most helpful this generation.</div>
       <div class="gardenGrid">
         <div class="gardenCard"><h4>Urban UCSD</h4><p id="conditionUrbanText">Urban condition appears here.</p></div>
         <div class="gardenCard"><h4>Mt. Laguna</h4><p id="conditionMountainText">Mt. Laguna condition appears here.</p></div>
       </div>
-      <div id="rareEventText" class="collapseWarning hidden"></div>
+      <div id="rareEventText" class="collapseWarning hidden"></div><div id="impactIndicators" class="impactIndicators"></div>
     </div>
+  </div>
+</div>
+
+
+<div id="extinctionOverlay" class="extinctionOverlay">
+  <div class="extinctionBox">
+    <h2>💀 Population Extinction Event</h2>
+    <p id="extinctionText">A population has collapsed.</p>
+    <button type="button" id="closeExtinctionButton" class="gold">Continue</button>
   </div>
 </div>
 
 <main>
 <div class="compactStickyBar" id="topActionBar">
-  <div class="stickyLabel">Game Actions</div>
+  <div class="stickyLabel">Game Actions</div><div id="smartBarMessage" class="smartBarMessage">Start the game, then use this bar to advance generations.</div>
   <div class="buttons center">
-    <button id="nextButton" class="blue" disabled>▶ Run Next Generation</button>
-    <button id="gardenButton" class="gardenButton" disabled>🧪 Common Garden</button>
+    <button type="button" id="nextButton" class="blue" disabled>▶ Run Next Generation</button>
+    <button type="button" id="gardenButton" class="gardenButton" disabled>🧪 Common Garden</button>
   </div>
 </div>
 
@@ -155,38 +405,42 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
       <div class="teamPanel urbanPanel">
         <h3>🏙️ Urban UCSD Team</h3>
         <p class="small">Goal is hidden until your team reveals it privately.</p>
-        <div class="buttons"><button class="gold" id="revealUrban">Reveal Urban Secret Objective</button></div>
+        <div class="buttons"><button type="button" class="gold" id="revealUrban">Reveal Urban Secret Objective</button></div>
       </div>
       <div class="teamPanel lagunaPanel">
         <h3>🏔️ Mt. Laguna Team</h3>
         <p class="small">Goal is hidden until your team reveals it privately.</p>
-        <div class="buttons"><button class="purple" id="revealLaguna">Reveal Mt. Laguna Secret Objective</button></div>
+        <div class="buttons"><button type="button" class="purple" id="revealLaguna">Reveal Mt. Laguna Secret Objective</button></div>
       </div>
     </div>
     <div class="supportBox"><h3>🏆 Achievement Badges</h3><div id="badgeArea" class="badges"><div class="badge lockedBadge">Start the game to unlock badges</div></div></div>
-    <div id="winner" class="winner hidden"></div>
+    <div id="winner" class="winner hidden"></div><div class="buttons center progressiveHidden"><button type="button" id="replayButton" class="replayButton">🔄 Replay With New Objectives</button></div>
   </div>
 </section>
 
 <section class="card"><h2>Game Setup</h2><div class="content">
   <div class="note"><b>Start here:</b> Generation 0 is the starting population only. No conditions change until you run the next generation.</div>
   <div class="setupGrid">
-    <div><label for="generations">Number of generations</label><select id="generations"><option value="5">5</option><option value="6" selected>6</option><option value="8">8</option><option value="10">10</option></select></div>
+    <div><label for="generations">Number of generations</label><select id="generations"><option value="5">5</option><option value="6">6</option><option value="8">8</option><option value="10" selected>10</option></select></div>
     <div><label for="startBold">Starting bold juncos per habitat</label><input id="startBold" type="number" min="1" max="50" value="10"></div>
     <div><label for="startShy">Starting shy juncos per habitat</label><input id="startShy" type="number" min="1" max="50" value="10"></div>
     <div><label for="intensity">Selection pressure intensity</label><select id="intensity"><option value="mild">Mild</option><option value="normal" selected>Normal</option><option value="strong">Strong</option></select></div>
   </div>
-  <div class="buttons center"><button id="startButton" class="bigActionButton">▶ Start Game</button><button id="resetButton" class="warning bigActionButton">Reset</button></div>
+  <div class="buttons center"><button type="button" id="startButton" class="bigActionButton">▶ Start Game</button><button type="button" id="resetButton" class="warning bigActionButton">Reset</button></div>
   <div id="check" class="small">Ready.</div>
 </div></section>
 
 <section class="card activeStep"><h2>Current Status <span id="genLabel">Generation 0</span></h2><div class="content">
-  <div class="note blueNote"><b>Flow:</b> Check resources → choose/keep strategies → run generation → read popup → check summary.</div>
+  <div class="generationHero">
+    <div id="bigGenerationLabel" class="bigGen">GENERATION 0</div>
+    <div id="bigScenarioLabel" class="scenario">Stable starting conditions</div>
+  </div>
+  <div class="note blueNote"><b>Flow:</b> Check resources → choose/keep strategies → run generation → read popup → check summary.</div><div class="fastHint">💡 Tip: Strategies stay active until changed. You usually only need 1–2 clicks per generation.</div>
   <div class="habitats">
     <div class="habitat ucsd">
       <h3>🏙️ Urban UCSD <span class="pill">Urban</span></h3>
-      <p class="small">More people, food scraps, buildings, noise, and disturbance.</p><div id="uMood" class="moodBox moodMid">😐 Stable Urban Population</div>
-      <div class="stats"><div class="stat"><div id="uBold" class="value">0</div><div>Bold</div></div><div class="stat"><div id="uShy" class="value">0</div><div>Shy</div></div><div class="stat"><div id="uTotal" class="value">0</div><div>Total</div></div><div class="stat"><div id="uPercent" class="value">0%</div><div>Bold</div></div><div class="stat"><div id="uAllele" class="value">0%</div><div>Bold allele</div></div><div class="stat"><div id="uCort" class="value">0</div><div>Avg. CORT</div></div></div>
+      <p class="small">More people, food scraps, buildings, noise, and disturbance.</p><div id="uMood" class="moodBox moodMid">😐 Stable Urban Population</div><div id="uStatusChips" class="statusChips"></div>
+      <div class="stats"><div class="stat"><div id="uBold" class="value">0</div><div>Bold</div></div><div class="stat"><div id="uShy" class="value">0</div><div>Shy</div></div><div class="stat"><div id="uTotal" class="value">0</div><div>Total</div></div><div class="stat"><div id="uPercent" class="value">0%</div><div>Bold</div></div><div class="stat"><div id="uAllele" class="value">0%</div><div><span class="tooltip" title="Percent of the population carrying the boldness allele.">Bold allele ⓘ</span></div></div><div class="stat"><div id="uCort" class="value">0</div><div><span class="tooltip" title="Average stress hormone level. Lower CORT often correlates with higher boldness in this model.">Avg. CORT ⓘ</span></div></div></div>
       <div class="meterBox"><b>Boldness allele frequency</b><div class="meter"><div id="uAlleleFill" class="fill alleleFill"></div></div></div>
       <div class="meterBox"><b>Average CORT</b><div class="meter"><div id="uCortFill" class="fill cortFill"></div></div></div>
       <div class="resourceBox">
@@ -198,17 +452,28 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
         </div>
         <div id="uCollapseWarning" class="collapseWarning hidden">⚠️ Urban UCSD resource crisis!</div>
       </div>
-      <div class="choice"><b>Urban UCSD Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="uChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button class="gold strategy" data-team="ucsd" data-choice="bold">Forage near humans</button><button class="blue strategy" data-team="ucsd" data-choice="mixed">Balanced exploration</button><button class="purple strategy" data-team="ucsd" data-choice="safe">Hide and wait</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">⚠️ Risk</span><span class="previewTag neutral">🧬 Alleles</span></div>
+      <div class="choice"><b>Urban UCSD Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="uChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button type="button" class="gold strategy" data-team="ucsd" data-choice="bold">Forage near humans</button><button type="button" class="blue strategy" data-team="ucsd" data-choice="mixed">Balanced exploration</button><button type="button" class="purple strategy" data-team="ucsd" data-choice="safe">Hide and wait</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">⚠️ Risk</span><span class="previewTag neutral">🧬 Alleles</span></div>
         <div class="choiceCostKey"><h4>Urban Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th></tr><tr><td>Forage</td><td class="costGood">+2</td><td class="costBad">-2</td><td class="costBad">-1</td></tr><tr><td>Balanced</td><td>0</td><td class="costBad">-1</td><td>0</td></tr><tr><td>Hide</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td></tr></table></div>
       </div>
+
+<div class="resourceBox">
+  <b>🧰 Urban Intervention Tokens</b>
+  <p class="tiny">Use only when needed. Each token can only be used once.</p>
+  <div class="tokenBar">
+    <button type="button" class="tokenBtn blue interventionBtn" data-team="ucsd" data-effect="food">🍎 Emergency Food</button>
+    <button type="button" class="tokenBtn purple interventionBtn" data-team="ucsd" data-effect="safety">🛡 Increase Safety</button>
+  </div>
+  <div id="uTokenCount" class="tiny">Tokens remaining: 2</div>
+</div>
+
       <div class="event"><b id="uEventTitle">Generation 0: Starting population</b><div id="uEventText">No habitat condition changes yet.</div><div class="birdIcons" id="uBirdIcons">🐦🐦🐦🐦🐦</div></div>
-      <div class="outcome"><b>Outcome</b><div class="outcomeGrid"><div class="miniOutcome"><h4>Selection Pressure</h4><p id="uPressure">Environmental pressures will appear here.</p></div><div class="miniOutcome"><h4>Strategy Cost/Benefit</h4><p id="uStrategyEffect">Strategy effects appear here.</p></div><div class="miniOutcome"><h4>Population Changes</h4><p id="uPopulationEffect">Population changes appear here.</p></div><div class="miniOutcome"><h4>Genes & CORT</h4><p id="uGeneEffect">Allele and CORT changes appear here.</p></div></div></div>
+      <div class="outcome minimizeText"><b>Outcome</b><div class="outcomeGrid"><div class="miniOutcome"><h4>Selection Pressure</h4><p id="uPressure">Environmental pressures will appear here.</p></div><div class="miniOutcome"><h4>Strategy Cost/Benefit</h4><p id="uStrategyEffect">Strategy effects appear here.</p></div><div class="miniOutcome"><h4>Population Changes</h4><p id="uPopulationEffect">Population changes appear here.</p></div><div class="miniOutcome"><h4>Genes & CORT</h4><p id="uGeneEffect">Allele and CORT changes appear here.</p></div></div></div><button type="button" class="whyButton blue" data-target="uWhy">Why did this happen?</button><div id="uWhy" class="whyText">Natural selection changes populations when some traits improve survival and reproduction in specific environments.</div>
     </div>
 
     <div class="habitat laguna">
       <h3>🏔️ Mt. Laguna <span class="pill">Forest</span></h3>
-      <p class="small">Forested habitat, fewer people, more cover, predators, and scattered food.</p><div id="mMood" class="moodBox moodMid">😐 Stable Forest Population</div>
-      <div class="stats"><div class="stat"><div id="mBold" class="value">0</div><div>Bold</div></div><div class="stat"><div id="mShy" class="value">0</div><div>Shy</div></div><div class="stat"><div id="mTotal" class="value">0</div><div>Total</div></div><div class="stat"><div id="mPercent" class="value">0%</div><div>Bold</div></div><div class="stat"><div id="mAllele" class="value">0%</div><div>Bold allele</div></div><div class="stat"><div id="mCort" class="value">0</div><div>Avg. CORT</div></div></div>
+      <p class="small">Forested habitat, fewer people, more cover, predators, and scattered food.</p><div id="mMood" class="moodBox moodMid">😐 Stable Forest Population</div><div id="mStatusChips" class="statusChips"></div>
+      <div class="stats"><div class="stat"><div id="mBold" class="value">0</div><div>Bold</div></div><div class="stat"><div id="mShy" class="value">0</div><div>Shy</div></div><div class="stat"><div id="mTotal" class="value">0</div><div>Total</div></div><div class="stat"><div id="mPercent" class="value">0%</div><div>Bold</div></div><div class="stat"><div id="mAllele" class="value">0%</div><div><span class="tooltip" title="Percent of the population carrying the boldness allele.">Bold allele ⓘ</span></div></div><div class="stat"><div id="mCort" class="value">0</div><div><span class="tooltip" title="Average stress hormone level. Lower CORT often correlates with higher boldness in this model.">Avg. CORT ⓘ</span></div></div></div>
       <div class="meterBox"><b>Boldness allele frequency</b><div class="meter"><div id="mAlleleFill" class="fill alleleFill"></div></div></div>
       <div class="meterBox"><b>Average CORT</b><div class="meter"><div id="mCortFill" class="fill cortFill"></div></div></div>
       <div class="resourceBox">
@@ -220,35 +485,74 @@ table{width:100%;border-collapse:collapse;background:white}.tablewrap{overflow-x
         </div>
         <div id="mCollapseWarning" class="collapseWarning hidden">⚠️ Mt. Laguna resource crisis!</div>
       </div>
-      <div class="choice"><b>Mt. Laguna Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="mChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button class="gold strategy" data-team="laguna" data-choice="bold">Search open areas</button><button class="blue strategy" data-team="laguna" data-choice="mixed">Balanced foraging</button><button class="purple strategy" data-team="laguna" data-choice="safe">Stay near cover</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">🦅 Predators</span><span class="previewTag neutral">🛡️ Safety</span></div>
+      <div class="choice"><b>Mt. Laguna Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="mChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button type="button" class="gold strategy" data-team="laguna" data-choice="bold">Search open areas</button><button type="button" class="blue strategy" data-team="laguna" data-choice="mixed">Balanced foraging</button><button type="button" class="purple strategy" data-team="laguna" data-choice="safe">Stay near cover</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">🦅 Predators</span><span class="previewTag neutral">🛡️ Safety</span></div>
         <div class="choiceCostKey"><h4>Mt. Laguna Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th></tr><tr><td>Open areas</td><td class="costGood">+1</td><td class="costBad">-2</td><td class="costBad">-2</td></tr><tr><td>Balanced</td><td>0</td><td class="costBad">-1</td><td class="costGood">+1</td></tr><tr><td>Cover</td><td class="costBad">-1</td><td>0</td><td class="costGood">+2</td></tr></table></div>
       </div>
+
+<div class="resourceBox">
+  <b>🧰 Mt. Laguna Intervention Tokens</b>
+  <p class="tiny">Use only when needed. Each token can only be used once.</p>
+  <div class="tokenBar">
+    <button type="button" class="tokenBtn blue interventionBtn" data-team="laguna" data-effect="food">🍎 Emergency Food</button>
+    <button type="button" class="tokenBtn purple interventionBtn" data-team="laguna" data-effect="safety">🛡 Increase Cover</button>
+  </div>
+  <div id="mTokenCount" class="tiny">Tokens remaining: 2</div>
+</div>
+
       <div class="event"><b id="mEventTitle">Generation 0: Starting population</b><div id="mEventText">No habitat condition changes yet.</div><div class="birdIcons" id="mBirdIcons">🐦🐦🐦🐦🐦</div></div>
-      <div class="outcome"><b>Outcome</b><div class="outcomeGrid"><div class="miniOutcome"><h4>Selection Pressure</h4><p id="mPressure">Environmental pressures will appear here.</p></div><div class="miniOutcome"><h4>Strategy Cost/Benefit</h4><p id="mStrategyEffect">Strategy effects appear here.</p></div><div class="miniOutcome"><h4>Population Changes</h4><p id="mPopulationEffect">Population changes appear here.</p></div><div class="miniOutcome"><h4>Genes & CORT</h4><p id="mGeneEffect">Allele and CORT changes appear here.</p></div></div></div>
+      <div class="outcome minimizeText"><b>Outcome</b><div class="outcomeGrid"><div class="miniOutcome"><h4>Selection Pressure</h4><p id="mPressure">Environmental pressures will appear here.</p></div><div class="miniOutcome"><h4>Strategy Cost/Benefit</h4><p id="mStrategyEffect">Strategy effects appear here.</p></div><div class="miniOutcome"><h4>Population Changes</h4><p id="mPopulationEffect">Population changes appear here.</p></div><div class="miniOutcome"><h4>Genes & CORT</h4><p id="mGeneEffect">Allele and CORT changes appear here.</p></div></div></div><button type="button" class="whyButton blue" data-target="mWhy">Why did this happen?</button><div id="mWhy" class="whyText">Predators, cover, and safety pressures can favor cautious behavior in Mt. Laguna birds.</div>
     </div>
   </div>
 
-  <div id="turnIdentity" class="turnIdentity">🌦️ Generation 0: Stable starting conditions.</div>
+  <div id="turnIdentity" class="turnIdentity">🌦️ Generation 0: Stable starting conditions.</div><div id="scenarioBanner" class="scenarioBanner">🎯 Scenario: Build stable populations before major disturbances begin.</div>
   <div id="roundConditionNote" class="gardenResult">🌦️ Generation 0: no condition changes yet.</div>
   <div id="momentumBanner" class="momentumBanner">Momentum bonuses will appear here.</div>
   <div class="gardenBox"><h3>🧪 Common Garden Experiment</h3><p class="small">Scientists tested whether boldness was inherited or learned by raising UCSD and Mt. Laguna juncos in the same controlled environment.</p><div class="gardenGrid"><div class="gardenCard"><h4>Controlled Variables</h4><ul><li>same aviary conditions</li><li>same food access</li><li>same human exposure</li><li>same nesting environment</li></ul></div><div class="gardenCard"><h4>Question</h4><p>If both groups are raised in the same environment, will UCSD birds still behave differently from Mt. Laguna birds?</p></div></div><div id="gardenResult" class="gardenResult">Run at least 2 generations, then click <strong>Common Garden</strong>.</div></div>
 </div></section>
 
-<section class="card"><h2 class="collapsible" id="toggleData">Data + Evidence (click to expand/collapse)</h2><div id="dataContent" class="content">
+<div class="buttons center" style="margin-top:6px;">
+<button type="button" id="dataAnalysisButton" class="instructionButton">📊 Show Data Analysis</button>
+</div>
+<div class="analysisDivider">🔬 Data Analysis / Post-Game Review</div><section class="card analysisPanel"><h2 class="collapsible" id="toggleData">Data + Evidence (click to expand/collapse)</h2><div id="dataContent" class="content" style="display:none;">
   <div class="note greenNote"><b>Record these numbers:</b> total population, percent bold, bold allele percent, average CORT, strategy, and resources.</div>
   <div class="tablewrap"><table><thead><tr><th>Gen</th><th>UCSD Bold</th><th>UCSD Shy</th><th>UCSD Total</th><th>UCSD % Bold</th><th>UCSD Allele %</th><th>UCSD CORT</th><th>UCSD Strategy</th><th>Mt. Bold</th><th>Mt. Shy</th><th>Mt. Total</th><th>Mt. % Bold</th><th>Mt. Allele %</th><th>Mt. CORT</th><th>Mt. Strategy</th><th>U Food</th><th>U Energy</th><th>U Safety</th><th>Mt Food</th><th>Mt Energy</th><th>Mt Safety</th></tr></thead><tbody id="dataBody"></tbody></table></div>
   <div class="supportBox"><h3>⚡ End of Generation Summary</h3><div class="quickSummary"><div id="summaryUrban" class="summaryCard summaryUrban">Urban summary will appear here.</div><div id="summaryLaguna" class="summaryCard summaryLaguna">Mt. Laguna summary will appear here.</div><div id="summaryCort" class="summaryCard summaryCort">CORT summary will appear here.</div></div></div>
   <div class="supportBox"><h3 class="collapsible" id="toggleTimeline">🕒 Evolution Timeline (click to open)</h3><div id="timelineContent" class="collapsibleContent"><div id="timeline" class="timeline"></div></div></div>
   <h3>Quick Visual</h3><div id="barArea" class="barArea"></div><div class="legend"><span><span class="key boldBar"></span>Bold</span><span><span class="key shyBar"></span>Shy</span><span><span class="key alleleBar"></span>Bold Allele</span><span><span class="key cortBar"></span>CORT</span></div>
   <div class="supportBox"><h3>🔎 Before vs. After Comparison</h3><p class="small">Compare Generation 0 with the current generation.</p><div class="tablewrap"><table class="compareTable"><thead><tr><th>Population</th><th>Trait</th><th>Gen 0</th><th>Current</th><th>Change</th></tr></thead><tbody id="comparisonBody"><tr><td colspan="5">Start the game to compare data.</td></tr></tbody></table></div></div>
-  <div class="promptGrid"><div class="prompt"><h3>Graph It</h3><ol><li>Put generation on the x-axis.</li><li>Choose percent bold, allele frequency, or CORT for the y-axis.</li><li>Make two lines: UCSD and Mt. Laguna.</li></ol></div><div class="prompt"><h3>Explain It</h3><ol><li>Which strategy helped?</li><li>What tradeoffs occurred?</li><li>How did inherited alleles change?</li><li>What happened to CORT?</li></ol></div></div>
-  <div class="gardenBox"><h3>📉 Current CORT vs Boldness Relationship</h3><div class="gardenGrid"><div class="gardenCard"><h4>Current Relationship</h4><p id="correlationText">Collect more generations to calculate the relationship.</p></div><div class="gardenCard"><h4>What the Data Suggests</h4><p id="correlationExplanation">As boldness changes, CORT levels may also change.</p></div></div><div class="scatterWrap"><svg id="cortScatter" class="scatterSvg" viewBox="0 0 640 280"></svg></div><div class="gardenResult"><strong>Think About It:</strong> Does this prove CORT causes boldness? Or does it only show a relationship between the two variables?</div></div>
+  <div class="promptGrid analysisOnly"><div class="prompt"><h3>Graph It</h3><ol><li>Put generation on the x-axis.</li><li>Choose percent bold, allele frequency, or CORT for the y-axis.</li><li>Make two lines: UCSD and Mt. Laguna.</li></ol></div><div class="prompt"><h3>Explain It</h3><ol><li>Which strategy helped?</li><li>What tradeoffs occurred?</li><li>How did inherited alleles change?</li><li>What happened to CORT?</li></ol></div></div>
+  <div class="gardenBox analysisOnly"><h3>📉 Current CORT vs Boldness Relationship</h3><div class="gardenGrid"><div class="gardenCard"><h4>Current Relationship</h4><p id="correlationText">Collect more generations to calculate the relationship.</p></div><div class="gardenCard"><h4>What the Data Suggests</h4><p id="correlationExplanation">As boldness changes, CORT levels may also change.</p></div></div><div class="scatterWrap"><svg id="cortScatter" class="scatterSvg" viewBox="0 0 640 280"></svg></div><div class="gardenResult"><strong>Think About It:</strong> Does this prove CORT causes boldness? Or does it only show a relationship between the two variables?</div></div>
+
+
+<div class="supportBox">
+<h3>🧪 Evolution Debrief</h3>
+<div class="debriefGrid">
+<div class="debriefCard"><h4>Urban UCSD Evolution</h4><p id="urbanDebrief">Finish the game to see results.</p></div>
+<div class="debriefCard"><h4>Mt. Laguna Evolution</h4><p id="lagunaDebrief">Finish the game to see results.</p></div>
+</div>
+<div id="reactionAlert" class="reactionAlert">Environmental reactions will appear during gameplay.</div>
+</div>
+
+<div class="supportBox">
+<h3>📋 End-Game Report Card</h3>
+<div class="reportGrid">
+<div class="reportCard"><h4>Objective Results</h4><p id="reportObjectives">Finish the game to see results.</p></div>
+<div class="reportCard"><h4>Population Changes</h4><p id="reportPopulation">Finish the game to see results.</p></div>
+<div class="reportCard"><h4>Alleles + CORT</h4><p id="reportAlleles">Finish the game to see results.</p></div>
+<div class="reportCard"><h4>Natural Selection Evidence</h4><p id="reportSelection">Finish the game to see results.</p></div>
+</div>
+<h4>Printable Result Code</h4>
+<div id="resultCode" class="resultCode">Result code appears after the game ends.</div>
+<button type="button" id="copyResultButton" class="blue" style="margin-top:10px;">Copy Result Code</button>
+</div>
+
 </div></section>
+<button type="button" id="floatingDataButton" class="instructionButton floatingDataBtn">📊 Data</button>
 </main>
 
 <script>
-const ids=['practiceButton','tutorialModal','tutorialProgress','prevTutorialButton','nextTutorialButton','finishTutorialButton','skipTutorialButton','instructionsButton','instructionsModal','closeInstructionsButton','secretModal','secretTitle','secretText','closeSecretButton','winModal','closeWinButton','winText','conditionModal','closeConditionButton','conditionUrbanText','conditionMountainText','rareEventText','revealUrban','revealLaguna','generations','startBold','startShy','intensity','startButton','resetButton','nextButton','gardenButton','genLabel','uBold','uShy','uTotal','uPercent','uAllele','uCort','uAlleleFill','uCortFill','uEventTitle','uEventText','uBirdIcons','uChoiceWarning','uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mBold','mShy','mTotal','mPercent','mAllele','mCort','mAlleleFill','mCortFill','mEventTitle','mEventText','mBirdIcons','mChoiceWarning','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect','winner','uFoodResource','uEnergyResource','uSafetyResource','uFoodFill','uEnergyFill','uSafetyFill','uCollapseWarning','mFoodResource','mEnergyResource','mSafetyResource','mFoodFill','mEnergyFill','mSafetyFill','mCollapseWarning','badgeArea','dataBody','barArea','correlationText','correlationExplanation','cortScatter','gardenResult','roundConditionNote','comparisonBody','summaryUrban','summaryLaguna','summaryCort','uMood','mMood','toggleTimeline','timelineContent','timeline','turnOverlay','turnIdentity','momentumBanner','confetti','toggleData','dataContent','check'];
-const el={};ids.forEach(id=>el[id]=document.getElementById(id));
+const ids=['dataAnalysisButton','practiceButton','tutorialModal','tutorialProgress','prevTutorialButton','nextTutorialButton','finishTutorialButton','skipTutorialButton','instructionsButton','instructionsModal','closeInstructionsButton','secretModal','secretTitle','secretText','closeSecretButton','winModal','closeWinButton','winText','conditionModal','closeConditionButton','conditionUrbanText','conditionMountainText','rareEventText','impactIndicators','revealUrban','revealLaguna','generations','startBold','startShy','intensity','startButton','resetButton','nextButton','gardenButton','genLabel','uBold','uShy','uTotal','uPercent','uAllele','uCort','uAlleleFill','uCortFill','uEventTitle','uEventText','uBirdIcons','uChoiceWarning','uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mBold','mShy','mTotal','mPercent','mAllele','mCort','mAlleleFill','mCortFill','mEventTitle','mEventText','mBirdIcons','mChoiceWarning','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect','winner','uFoodResource','uEnergyResource','uSafetyResource','uFoodFill','uEnergyFill','uSafetyFill','uCollapseWarning','mFoodResource','mEnergyResource','mSafetyResource','mFoodFill','mEnergyFill','mSafetyFill','mCollapseWarning','badgeArea','dataBody','barArea','correlationText','correlationExplanation','cortScatter','gardenResult','roundConditionNote','comparisonBody','summaryUrban','summaryLaguna','summaryCort','uMood','mMood','toggleTimeline','timelineContent','timeline','turnOverlay','turnIdentity','momentumBanner','confetti','toggleData','dataContent','reportObjectives','reportPopulation','reportAlleles','reportSelection','resultCode','copyResultButton','newChallengeButton','scenarioBanner','urbanDebrief','lagunaDebrief','reactionAlert','uTokenCount','mTokenCount','extinctionOverlay','extinctionText','closeExtinctionButton','smartBarMessage','bigGenerationLabel','bigScenarioLabel','uStatusChips','mStatusChips','replayButton','floatingDataButton','check'];
+const el={};ids.forEach(id=>{el[id]=document.getElementById(id); if(!el[id]) console.warn('Missing optional element:', id);});
 const set=(id,text)=>{if(el[id])el[id].textContent=text;};
 const labels={bold:'Bold/risky',mixed:'Mixed',safe:'Cautious/safe'};
 const intensity={mild:.55,normal:1,strong:1.45};
@@ -266,11 +570,11 @@ const mountainEvents=[
  {title:'Patchy mountain food',text:'Food is scarce and spread out.',boldFit:1.04,shyFit:1.04,pressure:'food is scarce, so exploration helps, but cover still matters',expected:'mixed',favorsBold:'Bold birds sometimes found new food patches by exploring.',favorsShy:'Shy birds reduced predation risk by staying close to cover.'}
 ];
 const rareEvents=[
- {name:'🔥 Wildfire smoke',text:'Smoke lowers survival in Mt. Laguna.',uBold:1,uShy:1,mBold:.78,mShy:.82,food:-1,energy:-1,safety:-2},
- {name:'🎉 Campus festival',text:'Extra food scraps help Urban UCSD birds.',uBold:1.20,uShy:1.05,mBold:1,mShy:1,food:2,energy:-1,safety:-1},
- {name:'🦠 Disease outbreak',text:'Both populations lose some birds.',uBold:.86,uShy:.86,mBold:.86,mShy:.86,food:-1,energy:-2,safety:0},
- {name:'❄️ Harsh winter',text:'Food becomes scarce.',uBold:.90,uShy:.92,mBold:.86,mShy:.90,food:-3,energy:-2,safety:0},
- {name:'🦅 Predator boom',text:'Predators strongly affect exposed Mt. Laguna birds.',uBold:1,uShy:1,mBold:.72,mShy:1.03,food:0,energy:-1,safety:-3}
+ {name:'🔥 Wildfire smoke',text:'Smoke lowers survival in Mt. Laguna.',uBold:1,uShy:1,mBold:.78,mShy:.82,food:-1,energy:-1,safety:-2,impacts:[['⬇ Mt. Laguna survival','down'],['⬇ Safety','down'],['⬇ Food','down']]},
+ {name:'🎉 Campus festival',text:'Extra food scraps help Urban UCSD birds.',uBold:1.20,uShy:1.05,mBold:1,mShy:1,food:2,energy:-1,safety:-1,impacts:[['⬆ Urban food access','up'],['⬆ Bold urban survival','up'],['⬇ Safety','down']]},
+ {name:'🦠 Disease outbreak',text:'Both populations lose some birds.',uBold:.86,uShy:.86,mBold:.86,mShy:.86,food:-1,energy:-2,safety:0,impacts:[['⬇ Population survival','down'],['⬇ Energy','down']]},
+ {name:'❄️ Harsh winter',text:'Food becomes scarce.',uBold:.90,uShy:.92,mBold:.86,mShy:.90,food:-3,energy:-2,safety:0,impacts:[['⬇ Food','down'],['⬇ Energy','down'],['⬆ Stress risk','neutral']]},
+ {name:'🦅 Predator boom',text:'Predators strongly affect exposed Mt. Laguna birds.',uBold:1,uShy:1,mBold:.72,mShy:1.03,food:0,energy:-1,safety:-3,impacts:[['⬇ Open-area survival','down'],['⬆ Importance of cover','up'],['⬇ Safety','down']]}
 ];
 const urbanObjectives=[
  {text:'Urban Objective: Take advantage of human food sources. Finish with at least 70% bold birds, CORT at 14 or lower, and population above its starting size.',type:'urban_bold_low_cort'},
@@ -286,7 +590,7 @@ const lagunaObjectives=[
  {text:'Mt. Laguna Objective: Predator survivor. Finish with more shy birds than bold birds and CORT below 23.',type:'laguna_predator_survivor'},
  {text:'Mt. Laguna Objective: Stable forest population. Avoid collapse, keep Safety at 10 or higher, and keep bold allele frequency at 55% or lower.',type:'laguna_stable_forest'}
 ];
-const state={gen:0,maxGen:6,pressure:'normal',choices:{ucsd:'mixed',laguna:'mixed'},ucsd:{bold:0,shy:0,allele:50,cort:0},laguna:{bold:0,shy:0,allele:50,cort:0},resources:{ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}},badges:[],history:[],collapsed:false,secretObjectives:{urban:{text:'',type:''},laguna:{text:'',type:''}}};
+const state={gen:0,maxGen:6,pressure:'normal',choices:{ucsd:'mixed',laguna:'mixed'},ucsd:{bold:0,shy:0,allele:50,cort:0},laguna:{bold:0,shy:0,allele:50,cort:0},resources:{ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}},badges:[],history:[],collapsed:false,secretObjectives:{urban:{text:'',type:''},laguna:{text:'',type:''}},tokens:{ucsd:2,laguna:2}};
 const clamp=(n,min=0,max=999)=>Math.min(max,Math.max(min,Math.round(n)));
 const pctBold=pop=>(pop.bold+pop.shy)?Math.round(pop.bold/(pop.bold+pop.shy)*100):0;
 const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
@@ -319,26 +623,305 @@ function drawScatter(correlation){const svg=el.cortScatter,w=640,h=280,m={l:56,r
 function updateMood(){const setMood=(id,total,cort,res)=>{const e=el[id];e.classList.remove('moodGood','moodMid','moodBad');if(total>20&&cort<16&&res.food>6){e.classList.add('moodGood');e.textContent='😀 Thriving Population';}else if(total<8||cort>24||res.food<3){e.classList.add('moodBad');e.textContent='⚠️ Struggling Population';}else{e.classList.add('moodMid');e.textContent='😐 Stable Population';}};setMood('uMood',state.ucsd.bold+state.ucsd.shy,state.ucsd.cort,state.resources.ucsd);setMood('mMood',state.laguna.bold+state.laguna.shy,state.laguna.cort,state.resources.laguna);}
 function updateQuickSummary(){if(state.history.length<2)return;const prev=state.history[state.history.length-2],cur=state.history[state.history.length-1];const uDiff=cur.up-prev.up,mDiff=cur.mp-prev.mp,cDiff=cur.uc-prev.uc;set('summaryUrban',`🏙️ Bold birds ${uDiff>=0?'🟢 increased':'🔴 decreased'} (${uDiff>0?'+':''}${uDiff}%)`);set('summaryLaguna',`🏔️ Forest birds ${mDiff>=0?'🟢 increased':'🔴 decreased'} (${mDiff>0?'+':''}${mDiff}%)`);set('summaryCort',`💓 Urban CORT ${cDiff>=0?'rose':'fell'} (${cDiff>0?'+':''}${cDiff})`);}
 function updateTimeline(){const tl=el.timeline;if(!tl||state.history.length===0)return;const latest=state.history[state.history.length-1];const item=document.createElement('div');item.className='timelineItem pulse';let text='Generation '+latest.gen+': ';if(latest.up>70)text+='Urban bold birds became dominant.';else if(latest.mp<40)text+='Mt. Laguna stayed cautious.';else text+='Both populations remained mixed.';item.textContent=text;tl.appendChild(item);}
+
+function renderImpactIndicators(rare){
+ const container = el.impactIndicators;
+ if(!container) return;
+
+ if(!rare || !rare.impacts){
+   container.innerHTML = '<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';
+   return;
+ }
+
+ container.innerHTML = rare.impacts.map(([text,type])=>{
+   const cls = type==='up' ? 'impactUp' : type==='down' ? 'impactDown' : 'impactNeutral';
+   return `<div class="impactTag ${cls}">${text}</div>`;
+ }).join('');
+}
+
 function updateTurnIdentity(rare){let text='🌦️ Stable generation';if(rare)text=rare.name+' Generation';else if(state.pressure==='strong')text='⚡ Strong Selection Pressure Generation';else if(state.pressure==='mild')text='🌱 Mild Selection Pressure Generation';set('turnIdentity',text);}
 function updateMomentum(){if(state.history.length<3){set('momentumBanner','Momentum bonuses will appear here.');return;}const a=state.history,last=a[a.length-1],mid=a[a.length-2],old=a[a.length-3];let msg='No active momentum bonus.';if(last.up>mid.up&&mid.up>old.up)msg='🏙️ Urban Momentum: Urban boldness has increased for 3 consecutive generations.';if(last.mp<mid.mp&&mid.mp<old.mp)msg='🏔️ Forest Stability Momentum: Mt. Laguna has become more cautious for 3 consecutive generations.';set('momentumBanner',msg);}
 function applyChoiceHints(){document.querySelectorAll('.strategy').forEach(btn=>btn.classList.remove('choiceGlow'));if(state.resources.ucsd.food<4){const b=document.querySelector('.strategy[data-team="ucsd"][data-choice="bold"]');if(b)b.classList.add('choiceGlow');}if(state.resources.laguna.safety<4){const b=document.querySelector('.strategy[data-team="laguna"][data-choice="safe"]');if(b)b.classList.add('choiceGlow');}}
 function celebrateWin(){const c=el.confetti;c.innerHTML='';c.classList.add('show');const colors=['#f2a51a','#1d78bd','#2d7a32','#c44f86','#7353ba'];for(let i=0;i<120;i++){const d=document.createElement('div');d.className='confettiPiece';d.style.left=(Math.random()*100)+'vw';d.style.background=colors[Math.floor(Math.random()*colors.length)];d.style.animationDelay=(Math.random()*1.5)+'s';c.appendChild(d);}setTimeout(()=>c.classList.remove('show'),3500);}
-function display(){set('genLabel','Generation '+state.gen);[['u',state.ucsd],['m',state.laguna]].forEach(([p,pop])=>{set(p+'Bold',pop.bold);set(p+'Shy',pop.shy);set(p+'Total',pop.bold+pop.shy);set(p+'Percent',pctBold(pop)+'%');set(p+'Allele',pop.allele+'%');set(p+'Cort',pop.cort);el[p+'AlleleFill'].style.width=pop.allele+'%';el[p+'CortFill'].style.width=(pop.cort/30*100)+'%';});set('uFoodResource',state.resources.ucsd.food);set('uEnergyResource',state.resources.ucsd.energy);set('uSafetyResource',state.resources.ucsd.safety);set('mFoodResource',state.resources.laguna.food);set('mEnergyResource',state.resources.laguna.energy);set('mSafetyResource',state.resources.laguna.safety);el.uFoodFill.style.width=(state.resources.ucsd.food/20*100)+'%';el.uEnergyFill.style.width=(state.resources.ucsd.energy/20*100)+'%';el.uSafetyFill.style.width=(state.resources.ucsd.safety/20*100)+'%';el.mFoodFill.style.width=(state.resources.laguna.food/20*100)+'%';el.mEnergyFill.style.width=(state.resources.laguna.energy/20*100)+'%';el.mSafetyFill.style.width=(state.resources.laguna.safety/20*100)+'%';el.dataBody.innerHTML=state.history.map(r=>`<tr><td>${r.gen}</td><td>${r.ub}</td><td>${r.us}</td><td>${r.ut}</td><td>${r.up}%</td><td>${r.ua}%</td><td>${r.uc}</td><td>${r.uch}</td><td>${r.mb}</td><td>${r.ms}</td><td>${r.mt}</td><td>${r.mp}%</td><td>${r.ma}%</td><td>${r.mc}</td><td>${r.mch}</td><td>${r.uFood}</td><td>${r.uEnergy}</td><td>${r.uSafety}</td><td>${r.mFood}</td><td>${r.mEnergy}</td><td>${r.mSafety}</td></tr>`).join('');const max=Math.max(1,...state.history.map(r=>Math.max(r.ub,r.us,r.ua*4,r.uc*8)));el.barArea.innerHTML=state.history.map(r=>`<div class="barGroup"><div class="bar boldBar" style="height:${r.ub/max*100}%"></div><div class="bar shyBar" style="height:${r.us/max*100}%"></div><div class="bar alleleBar" style="height:${r.ua*4/max*100}%"></div><div class="bar cortBar" style="height:${r.uc*8/max*100}%"></div></div>`).join('');enforceChoiceAvailability();document.querySelectorAll('.strategy').forEach(btn=>btn.classList.toggle('selected',state.choices[btn.dataset.team]===btn.dataset.choice));el.uBirdIcons.textContent=birdString(state.ucsd.bold,state.ucsd.shy);el.mBirdIcons.textContent=birdString(state.laguna.bold,state.laguna.shy);checkBadges();updateBadges();checkCollapse();updateComparisonTable();const cor=calculateCorrelation();set('correlationText',cor.label);set('correlationExplanation',cor.explanation);drawScatter(cor);updateMood();updateQuickSummary();updateMomentum();applyChoiceHints();}
+
+function updateReport(){
+ if(state.history.length<2) return;
+ const first=state.history[0];
+ const last=state.history[state.history.length-1];
+
+ set('reportObjectives', evaluateSecretObjectives().replace(/\n/g,' '));
+
+ set('reportPopulation',
+   `Urban population: ${first.ut} → ${last.ut}. Mt. Laguna population: ${first.mt} → ${last.mt}.`
+ );
+
+ set('reportAlleles',
+   `Urban allele: ${first.ua}% → ${last.ua}%. Urban CORT: ${first.uc} → ${last.uc}. Mt. Laguna allele: ${first.ma}% → ${last.ma}%.`
+ );
+
+ set('reportSelection',
+   Math.abs(last.up-first.up) > Math.abs(last.mp-first.mp)
+   ? 'Urban UCSD showed the strongest shift in boldness.'
+   : 'Mt. Laguna showed the strongest shift in boldness.'
+ );
+
+ set('resultCode',
+`JUNCO RESULT CODE
+Generations: ${state.gen}
+Urban Bold: ${first.up}% -> ${last.up}%
+Urban Allele: ${first.ua}% -> ${last.ua}%
+Urban CORT: ${first.uc} -> ${last.uc}
+Mt Bold: ${first.mp}% -> ${last.mp}%
+Mt Allele: ${first.ma}% -> ${last.ma}%
+Mt CORT: ${first.mc} -> ${last.mc}
+Badges: ${state.badges.join(', ') || 'None'}`
+ );
+}
+
+function newChallenge(){
+ resetGame();
+ assignSecretObjectives();
+ openTutorial();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function focusCurrentGeneration(){
+ const current=document.querySelector('.activeStep');
+ if(current){
+   current.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+}
+function compactStickyBarOnScroll(){
+ const bar=document.getElementById('topActionBar');
+ if(!bar) return;
+ if(window.scrollY>120) bar.classList.add('compact');
+ else bar.classList.remove('compact');
+}
+
+
+function updateScenarioBanner(rare){
+ let text='🎯 Scenario: Build stable populations before major disturbances begin.';
+ if(rare){
+   text='⚠️ Scenario Event: '+rare.name;
+ }else if(state.gen>=6){
+   text='🧬 Late-Game Evolution Phase: Long-term adaptation now matters more.';
+ }else if(state.gen>=3){
+   text='🌍 Mid-Game Adaptation Phase: Environmental pressures are increasing.';
+ }
+ set('scenarioBanner',text);
+}
+
+function applyEnvironmentReaction(){
+ let alert='No major environmental reaction this generation.';
+ if(pctBold(state.ucsd)>80){
+   state.resources.ucsd.safety=clamp(state.resources.ucsd.safety-2,0,20);
+   alert='⚠️ Urban birds became extremely bold. Human conflict and predator exposure reduced Urban Safety.';
+ }
+ if(pctBold(state.laguna)<25){
+   state.resources.laguna.food=clamp(state.resources.laguna.food-1,0,20);
+   alert='🌲 Extremely cautious Mt. Laguna birds struggled to find enough food.';
+ }
+ set('reactionAlert',alert);
+}
+
+function useIntervention(team,effect){
+ if(state.tokens[team]<=0) return;
+ state.tokens[team]--;
+
+ if(effect==='food'){
+   state.resources[team].food=clamp(state.resources[team].food+4,0,20);
+ }
+ if(effect==='safety'){
+   state.resources[team].safety=clamp(state.resources[team].safety+4,0,20);
+ }
+
+ set(team==='ucsd'?'uTokenCount':'mTokenCount','Tokens remaining: '+state.tokens[team]);
+ display();
+}
+
+function showExtinction(message){
+ set('extinctionText',message);
+ el.extinctionOverlay.classList.add('show');
+}
+
+function updateDebrief(){
+ if(state.history.length<2)return;
+ const first=state.history[0];
+ const last=state.history[state.history.length-1];
+
+ const urbanText = last.up>first.up
+   ? 'Urban UCSD evolved greater boldness, lower stress tolerance, and increased bold allele frequency in response to human food and disturbance.'
+   : 'Urban UCSD remained relatively cautious and showed weaker adaptation to human-dominated environments.';
+
+ const lagunaText = last.mp<first.mp
+   ? 'Mt. Laguna evolved more cautious behavior, relying on cover and predator avoidance for survival.'
+   : 'Mt. Laguna maintained or increased boldness despite predator-heavy conditions.';
+
+ set('urbanDebrief',urbanText);
+ set('lagunaDebrief',lagunaText);
+}
+
+
+function trendArrow(current, previous){
+ if(previous === undefined || previous === null) return '<span class="trendArrow trendSame">→</span>';
+ if(current > previous) return '<span class="trendArrow trendUp">↑</span>';
+ if(current < previous) return '<span class="trendArrow trendDown">↓</span>';
+ return '<span class="trendArrow trendSame">→</span>';
+}
+function buildChips(team){
+ const pop = team==='ucsd' ? state.ucsd : state.laguna;
+ const res = state.resources[team];
+ const chips = [];
+ const bold = pctBold(pop);
+ chips.push({text:bold>=65?'🟢 Boldness high':bold<=35?'🔵 Cautious trend':'⚖️ Mixed behavior', cls:bold>=65?'chipGood':bold<=35?'chipInfo':'chipWarn'});
+ chips.push({text:res.food<=3?'🍎 Food shortage':res.food>=12?'🍎 Food strong':'🍎 Food stable', cls:res.food<=3?'chipBad':res.food>=12?'chipGood':'chipInfo'});
+ chips.push({text:res.safety<=3?'⚠️ Safety low':res.safety>=12?'🛡 Safety strong':'🛡 Safety stable', cls:res.safety<=3?'chipBad':res.safety>=12?'chipGood':'chipInfo'});
+ chips.push({text:pop.cort>=24?'💓 CORT high':pop.cort<=14?'💓 CORT low':'💓 CORT moderate', cls:pop.cort>=24?'chipBad':pop.cort<=14?'chipGood':'chipWarn'});
+ return chips.map(c=>`<span class="statusChip ${c.cls}">${c.text}</span>`).join('');
+}
+function updateStatusChips(){
+ if(el.uStatusChips) el.uStatusChips.innerHTML = buildChips('ucsd');
+ if(el.mStatusChips) el.mStatusChips.innerHTML = buildChips('laguna');
+}
+function updateGenerationHero(){
+ set('bigGenerationLabel','GENERATION '+state.gen);
+ let scenario = 'Stable starting conditions';
+ if(el.turnIdentity && el.turnIdentity.textContent.trim()) scenario = el.turnIdentity.textContent.replace(/^🌦️\s*/,'');
+ if(el.bigScenarioLabel) el.bigScenarioLabel.textContent = scenario;
+}
+function updateSmartBar(){
+ let msg = 'Choose or keep strategies, then run the next generation.';
+ if(state.gen===0 && state.history.length===0) msg='Start the game to begin.';
+ else if(state.gen>=state.maxGen) msg='Game complete. Open Data Analysis for the final report.';
+ else if(state.resources.ucsd.food<=2 || state.resources.laguna.food<=2) msg='🍎 Low food warning: consider food strategies or intervention tokens.';
+ else if(state.resources.ucsd.safety<=2 || state.resources.laguna.safety<=2) msg='🛡 Low safety warning: consider safety strategies or tokens.';
+ else if(state.collapsed) msg='⚠️ Collapse risk is active.';
+ set('smartBarMessage',msg);
+}
+function addTrendArrows(){
+ const last = state.history[state.history.length-1];
+ const prev = state.history[state.history.length-2];
+ if(!last) return;
+ const pairs = [
+   ['uPercent', last.up, prev?prev.up:null], ['uAllele', last.ua, prev?prev.ua:null], ['uCort', last.uc, prev?prev.uc:null],
+   ['mPercent', last.mp, prev?prev.mp:null], ['mAllele', last.ma, prev?prev.ma:null], ['mCort', last.mc, prev?prev.mc:null],
+   ['uFoodResource', last.uFood, prev?prev.uFood:null], ['uEnergyResource', last.uEnergy, prev?prev.uEnergy:null], ['uSafetyResource', last.uSafety, prev?prev.uSafety:null],
+   ['mFoodResource', last.mFood, prev?prev.mFood:null], ['mEnergyResource', last.mEnergy, prev?prev.mEnergy:null], ['mSafetyResource', last.mSafety, prev?prev.mSafety:null]
+ ];
+ pairs.forEach(([id,val,old])=>{
+   if(el[id]) el[id].innerHTML = String(val) + (id.includes('Percent')||id.includes('Allele')?'%':'') + trendArrow(val,old);
+ });
+}
+function setDataOpen(open){
+ if(!el.dataContent) return;
+ document.body.classList.toggle('analysisMode', open);
+ el.dataContent.style.display = open ? 'block' : 'none';
+ if(el.floatingDataButton) el.floatingDataButton.textContent = open ? '❌ Close Data' : '📊 Data';
+ if(el.dataAnalysisButton) el.dataAnalysisButton.textContent = open ? '📊 Hide Data Analysis' : '📊 Show Data Analysis';
+ const panel = document.querySelector('.analysisPanel');
+ if(panel) panel.style.display = open ? 'block' : '';
+ if(open) el.dataContent.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function display(){set('genLabel','Generation '+state.gen);[['u',state.ucsd],['m',state.laguna]].forEach(([p,pop])=>{set(p+'Bold',pop.bold);set(p+'Shy',pop.shy);set(p+'Total',pop.bold+pop.shy);set(p+'Percent',pctBold(pop)+'%');set(p+'Allele',pop.allele+'%');set(p+'Cort',pop.cort);el[p+'AlleleFill'].style.width=pop.allele+'%';el[p+'CortFill'].style.width=(pop.cort/30*100)+'%';});set('uFoodResource',state.resources.ucsd.food);set('uEnergyResource',state.resources.ucsd.energy);set('uSafetyResource',state.resources.ucsd.safety);set('mFoodResource',state.resources.laguna.food);set('mEnergyResource',state.resources.laguna.energy);set('mSafetyResource',state.resources.laguna.safety);set('uTokenCount','Tokens remaining: '+state.tokens.ucsd);set('mTokenCount','Tokens remaining: '+state.tokens.laguna);el.uFoodFill.style.width=(state.resources.ucsd.food/20*100)+'%';el.uEnergyFill.style.width=(state.resources.ucsd.energy/20*100)+'%';el.uSafetyFill.style.width=(state.resources.ucsd.safety/20*100)+'%';el.mFoodFill.style.width=(state.resources.laguna.food/20*100)+'%';el.mEnergyFill.style.width=(state.resources.laguna.energy/20*100)+'%';el.mSafetyFill.style.width=(state.resources.laguna.safety/20*100)+'%';el.dataBody.innerHTML=state.history.map(r=>`<tr><td>${r.gen}</td><td>${r.ub}</td><td>${r.us}</td><td>${r.ut}</td><td>${r.up}%</td><td>${r.ua}%</td><td>${r.uc}</td><td>${r.uch}</td><td>${r.mb}</td><td>${r.ms}</td><td>${r.mt}</td><td>${r.mp}%</td><td>${r.ma}%</td><td>${r.mc}</td><td>${r.mch}</td><td>${r.uFood}</td><td>${r.uEnergy}</td><td>${r.uSafety}</td><td>${r.mFood}</td><td>${r.mEnergy}</td><td>${r.mSafety}</td></tr>`).join('');const max=Math.max(1,...state.history.map(r=>Math.max(r.ub,r.us,r.ua*4,r.uc*8)));el.barArea.innerHTML=state.history.map(r=>`<div class="barGroup"><div class="bar boldBar" style="height:${r.ub/max*100}%"></div><div class="bar shyBar" style="height:${r.us/max*100}%"></div><div class="bar alleleBar" style="height:${r.ua*4/max*100}%"></div><div class="bar cortBar" style="height:${r.uc*8/max*100}%"></div></div>`).join('');enforceChoiceAvailability();document.querySelectorAll('.strategy').forEach(btn=>btn.classList.toggle('selected',state.choices[btn.dataset.team]===btn.dataset.choice));el.uBirdIcons.textContent=birdString(state.ucsd.bold,state.ucsd.shy);el.mBirdIcons.textContent=birdString(state.laguna.bold,state.laguna.shy);checkBadges();updateBadges();checkCollapse();updateComparisonTable();const cor=calculateCorrelation();set('correlationText',cor.label);set('correlationExplanation',cor.explanation);drawScatter(cor);updateMood();updateQuickSummary();updateMomentum();applyChoiceHints();updateReport();updateDebrief();updateStatusChips();updateGenerationHero();updateSmartBar();addTrendArrows();}
 function evaluateSecretObjectives(){const start=state.history.length?state.history[0]:null;if(!start)return'No starting data was recorded.';const urbanTotal=state.ucsd.bold+state.ucsd.shy,lagunaTotal=state.laguna.bold+state.laguna.shy,urbanBold=pctBold(state.ucsd),lagunaBold=pctBold(state.laguna);function urbanObjectiveMet(){switch(state.secretObjectives.urban.type){case'urban_bold_low_cort':return urbanBold>=70&&state.ucsd.cort<=14&&urbanTotal>start.ut;case'urban_allele_cort':return state.ucsd.allele>=70&&state.ucsd.cort<state.laguna.cort;case'urban_food_bold':return state.resources.ucsd.food>=8&&state.ucsd.bold>state.ucsd.shy;case'urban_city_specialist':return urbanBold>=65&&!state.collapsed;case'urban_low_stress':return state.ucsd.cort<=13&&urbanTotal>=20;default:return false;}}function lagunaObjectiveMet(){switch(state.secretObjectives.laguna.type){case'laguna_safety_shy':return state.resources.laguna.safety>=8&&state.laguna.shy>=state.laguna.bold;case'laguna_balanced_bold':return lagunaBold>=30&&lagunaBold<=55&&!state.collapsed;case'laguna_cover':return state.resources.laguna.safety>state.resources.laguna.food&&lagunaTotal>start.mt;case'laguna_predator_survivor':return state.laguna.shy>state.laguna.bold&&state.laguna.cort<23;case'laguna_stable_forest':return!state.collapsed&&state.resources.laguna.safety>=10&&state.laguna.allele<=55;default:return false;}}const u=urbanObjectiveMet(),m=lagunaObjectiveMet();return (u?'✅ Urban UCSD succeeded. ':'❌ Urban UCSD did not complete its objective. ')+state.secretObjectives.urban.text+'\\n\\n'+(m?'✅ Mt. Laguna succeeded. ':'❌ Mt. Laguna did not complete its objective. ')+state.secretObjectives.laguna.text;}
 function showWin(message){set('winText',message);el.winModal.classList.add('show');}
-function startGame(){state.gen=0;state.maxGen=Number(el.generations.value);state.pressure=el.intensity.value;const bold=Number(el.startBold.value),shy=Number(el.startShy.value),allele=clamp(bold/Math.max(bold+shy,1)*100,0,100);state.ucsd={bold,shy,allele,cort:0};state.laguna={bold,shy,allele,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.history=[];state.collapsed=false;state.choices={ucsd:'mixed',laguna:'mixed'};assignSecretObjectives();state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');el.winner.classList.add('hidden');el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'Run the next generation to collect evidence.'));set('gardenResult','Run at least 2 generations, then click Common Garden.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');record();display();el.nextButton.disabled=false;el.gardenButton.disabled=false;set('check','Game started.');}
-function nextGeneration(){el.turnOverlay.classList.add('show');setTimeout(()=>el.turnOverlay.classList.remove('show'),650);if(state.gen>=state.maxGen)return;state.pressure=el.intensity.value;const uAvail=availableChoices('ucsd'),mAvail=availableChoices('laguna');if(uAvail.length===0)markPopulationDead('ucsd');if(mAvail.length===0)markPopulationDead('laguna');if(uAvail.length===0||mAvail.length===0){state.gen++;record();updateTimeline();display();el.winner.classList.remove('hidden');el.winner.textContent='At least one population died because no resource-supported choices remained.';if(state.gen>=state.maxGen||(uAvail.length===0&&mAvail.length===0))el.nextButton.disabled=true;return;}if(!canAffordChoice('ucsd',state.choices.ucsd))state.choices.ucsd=uAvail[0];if(!canAffordChoice('laguna',state.choices.laguna))state.choices.laguna=mAvail[0];updateResources();const ue=pick(urbanEvents),me=pick(mountainEvents),rare=Math.random()<0.22?pick(rareEvents):null;const ur=apply(state.ucsd,ue,'ucsd',state.choices.ucsd),mr=apply(state.laguna,me,'laguna',state.choices.laguna);applyRare(rare,ur,mr);state.ucsd=ur.next;state.laguna=mr.next;state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');state.gen++;set('conditionUrbanText',ue.title+': '+ue.text+' Selection pressure: '+ue.pressure+'.');set('conditionMountainText',me.title+': '+me.text+' Selection pressure: '+me.pressure+'.');if(rare){el.rareEventText.classList.remove('hidden');set('rareEventText',rare.name+': '+rare.text);}else{el.rareEventText.classList.add('hidden');set('rareEventText','');}updateTurnIdentity(rare);el.conditionModal.classList.add('show');set('roundConditionNote','🌦️ Generation '+state.gen+' conditions were applied. See popup, resources, badges, and outcome cards.');set('uEventTitle',ue.title);set('uEventText',ue.text+' Survivors reproduce and pass alleles to offspring.');set('mEventTitle',me.title);set('mEventText',me.text+' Survivors reproduce and pass alleles to offspring.');const uo=explain(state.ucsd,ur.old,state.choices.ucsd,ue,'ucsd'),mo=explain(state.laguna,mr.old,state.choices.laguna,me,'laguna');set('uPressure',uo.pressure);set('uStrategyEffect',uo.strategy);set('uPopulationEffect',uo.population);set('uGeneEffect',uo.genes);set('mPressure',mo.pressure);set('mStrategyEffect',mo.strategy);set('mPopulationEffect',mo.population);set('mGeneEffect',mo.genes);record();updateTimeline();display();if(state.gen>=state.maxGen){el.nextButton.disabled=true;el.winner.classList.remove('hidden');el.winner.textContent='Game complete. Check secret objective results, badges, before/after evidence, and graphs.';showWin(evaluateSecretObjectives());celebrateWin();}}
+function startGame(){state.gen=0;state.maxGen=Number(el.generations.value);state.pressure=el.intensity.value;const bold=Number(el.startBold.value),shy=Number(el.startShy.value),allele=clamp(bold/Math.max(bold+shy,1)*100,0,100);state.ucsd={bold,shy,allele,cort:0};state.laguna={bold,shy,allele,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.history=[];state.collapsed=false;state.choices={ucsd:'mixed',laguna:'mixed'};assignSecretObjectives();state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');el.winner.classList.add('hidden');el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'Run the next generation to collect evidence.'));set('gardenResult','Run at least 2 generations, then click Common Garden.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');if(el.impactIndicators) el.impactIndicators.innerHTML='<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';record();display();el.nextButton.disabled=false;el.gardenButton.disabled=false;set('check','Game started.');}
+function nextGeneration(){el.turnOverlay.classList.add('show');setTimeout(()=>el.turnOverlay.classList.remove('show'),650);if(state.gen>=state.maxGen)return;state.pressure=el.intensity.value;const uAvail=availableChoices('ucsd'),mAvail=availableChoices('laguna');if(uAvail.length===0)markPopulationDead('ucsd');if(mAvail.length===0)markPopulationDead('laguna');if(uAvail.length===0||mAvail.length===0){state.gen++;record();updateTimeline();display();el.winner.classList.remove('hidden');el.winner.textContent='At least one population died because no resource-supported choices remained.';if(state.gen>=state.maxGen||(uAvail.length===0&&mAvail.length===0))el.nextButton.disabled=true;return;}if(!canAffordChoice('ucsd',state.choices.ucsd))state.choices.ucsd=uAvail[0];if(!canAffordChoice('laguna',state.choices.laguna))state.choices.laguna=mAvail[0];updateResources();const ue=pick(urbanEvents),me=pick(mountainEvents),rare=Math.random()<0.22?pick(rareEvents):null;const ur=apply(state.ucsd,ue,'ucsd',state.choices.ucsd),mr=apply(state.laguna,me,'laguna',state.choices.laguna);applyRare(rare,ur,mr);state.ucsd=ur.next;state.laguna=mr.next;state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');state.gen++;set('conditionUrbanText',ue.title+': '+ue.text+' Selection pressure: '+ue.pressure+'.');set('conditionMountainText',me.title+': '+me.text+' Selection pressure: '+me.pressure+'.');if(rare){el.rareEventText.classList.remove('hidden');set('rareEventText',rare.name+': '+rare.text);}else{el.rareEventText.classList.add('hidden');set('rareEventText','');}updateTurnIdentity(rare);updateScenarioBanner(rare);renderImpactIndicators(rare);el.conditionModal.classList.add('show');set('roundConditionNote','🌦️ Generation '+state.gen+' conditions were applied. See popup, resources, badges, and outcome cards.');set('uEventTitle',ue.title);set('uEventText',ue.text+' Survivors reproduce and pass alleles to offspring.');set('mEventTitle',me.title);set('mEventText',me.text+' Survivors reproduce and pass alleles to offspring.');const uo=explain(state.ucsd,ur.old,state.choices.ucsd,ue,'ucsd'),mo=explain(state.laguna,mr.old,state.choices.laguna,me,'laguna');set('uPressure',uo.pressure);set('uStrategyEffect',uo.strategy);set('uPopulationEffect',uo.population);set('uGeneEffect',uo.genes);set('mPressure',mo.pressure);set('mStrategyEffect',mo.strategy);set('mPopulationEffect',mo.population);set('mGeneEffect',mo.genes);record();updateTimeline();display();focusCurrentGeneration();if(state.gen>=state.maxGen){el.nextButton.disabled=true;el.winner.classList.remove('hidden');el.winner.textContent='Game complete. Check secret objective results, badges, before/after evidence, and graphs.';showWin(evaluateSecretObjectives());celebrateWin();}}
 function garden(){if(state.gen<2){set('gardenResult','Run at least 2 generations first. Scientists need enough evidence before comparing birds in a controlled environment.');return;}const uBold=pctBold(state.ucsd),mBold=pctBold(state.laguna),diff=Math.abs(uBold-mBold);const conclusion=diff>=10?`Same environment test: both populations were placed in identical aviary conditions. UCSD birds were still about ${uBold}% bold, while Mt. Laguna birds were about ${mBold}% bold. Because the difference stayed even when the environment was controlled, this supports the idea that boldness is inherited, not only learned.`:`Same environment test: both populations were placed in identical aviary conditions. The boldness difference was small: UCSD ${uBold}% bold and Mt. Laguna ${mBold}% bold. This suggests environment influences behavior, but inherited differences may still matter.`;set('gardenResult',`${conclusion} Boldness allele frequencies: UCSD ${state.ucsd.allele}%, Mt. Laguna ${state.laguna.allele}%.`);}
-function resetGame(){state.gen=0;state.history=[];state.ucsd={bold:0,shy:0,allele:50,cort:0};state.laguna={bold:0,shy:0,allele:50,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.collapsed=false;state.choices={ucsd:'mixed',laguna:'mixed'};assignSecretObjectives();el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'After you run a generation, evidence will appear here.'));set('gardenResult','Run at least 2 generations, then click Common Garden.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');el.winner.classList.add('hidden');el.nextButton.disabled=true;el.gardenButton.disabled=true;el.conditionModal.classList.remove('show');el.secretModal.classList.remove('show');el.winModal.classList.remove('show');display();set('check','Ready.');}
+function resetGame(){state.gen=0;state.history=[];state.ucsd={bold:0,shy:0,allele:50,cort:0};state.laguna={bold:0,shy:0,allele:50,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.collapsed=false;state.tokens={ucsd:2,laguna:2};state.choices={ucsd:'mixed',laguna:'mixed'};assignSecretObjectives();el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'After you run a generation, evidence will appear here.'));set('gardenResult','Run at least 2 generations, then click Common Garden.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');if(el.impactIndicators) el.impactIndicators.innerHTML='<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';el.winner.classList.add('hidden');el.nextButton.disabled=true;el.gardenButton.disabled=true;el.conditionModal.classList.remove('show');el.secretModal.classList.remove('show');el.winModal.classList.remove('show');document.body.classList.remove('gameStarted');display();set('check','Ready.');}
 
-document.querySelectorAll('.strategy').forEach(btn=>btn.addEventListener('click',()=>{if(btn.disabled||btn.classList.contains('blocked'))return;state.choices[btn.dataset.team]=btn.dataset.choice;display();}));
-el.practiceButton.addEventListener('click',openTutorial);el.prevTutorialButton.addEventListener('click',()=>{tutorialIndex--;updateTutorial();});el.nextTutorialButton.addEventListener('click',()=>{tutorialIndex++;updateTutorial();});el.finishTutorialButton.addEventListener('click',closeTutorial);el.skipTutorialButton.addEventListener('click',closeTutorial);el.tutorialModal.addEventListener('click',e=>{if(e.target===el.tutorialModal)closeTutorial();});
-el.revealUrban.addEventListener('click',()=>showSecret('urban'));el.revealLaguna.addEventListener('click',()=>showSecret('laguna'));el.closeSecretButton.addEventListener('click',()=>el.secretModal.classList.remove('show'));el.secretModal.addEventListener('click',e=>{if(e.target===el.secretModal)el.secretModal.classList.remove('show');});
-el.closeWinButton.addEventListener('click',()=>el.winModal.classList.remove('show'));el.winModal.addEventListener('click',e=>{if(e.target===el.winModal)el.winModal.classList.remove('show');});
-el.instructionsButton.addEventListener('click',()=>el.instructionsModal.classList.add('show'));el.closeInstructionsButton.addEventListener('click',()=>el.instructionsModal.classList.remove('show'));el.instructionsModal.addEventListener('click',e=>{if(e.target===el.instructionsModal)el.instructionsModal.classList.remove('show');});
-el.closeConditionButton.addEventListener('click',()=>el.conditionModal.classList.remove('show'));el.conditionModal.addEventListener('click',e=>{if(e.target===el.conditionModal)el.conditionModal.classList.remove('show');});
-el.startButton.addEventListener('click',startGame);el.nextButton.addEventListener('click',nextGeneration);el.gardenButton.addEventListener('click',garden);el.resetButton.addEventListener('click',resetGame);el.toggleTimeline.addEventListener('click',()=>el.timelineContent.classList.toggle('open'));el.toggleData.addEventListener('click',()=>{el.dataContent.style.display=el.dataContent.style.display==='none'?'block':'none';});
+
+document.querySelectorAll('.strategy').forEach(btn=>btn.addEventListener('click',()=>{
+ if(btn.disabled||btn.classList.contains('blocked'))return;
+ state.choices[btn.dataset.team]=btn.dataset.choice;
+ display();
+}));
+
+document.querySelectorAll('.interventionBtn').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+   useIntervention(btn.dataset.team,btn.dataset.effect);
+   btn.disabled=true;
+ });
+});
+
+if(el.practiceButton) el.practiceButton.addEventListener('click',openTutorial);
+if(el.prevTutorialButton) el.prevTutorialButton.addEventListener('click',()=>{tutorialIndex--;updateTutorial();});
+if(el.nextTutorialButton) el.nextTutorialButton.addEventListener('click',()=>{tutorialIndex++;updateTutorial();});
+if(el.finishTutorialButton) el.finishTutorialButton.addEventListener('click',closeTutorial);
+if(el.skipTutorialButton) el.skipTutorialButton.addEventListener('click',closeTutorial);
+if(el.tutorialModal) el.tutorialModal.addEventListener('click',e=>{if(e.target===el.tutorialModal)closeTutorial();});
+
+if(el.revealUrban) el.revealUrban.addEventListener('click',()=>showSecret('urban'));
+if(el.revealLaguna) el.revealLaguna.addEventListener('click',()=>showSecret('laguna'));
+if(el.closeSecretButton) el.closeSecretButton.addEventListener('click',()=>el.secretModal.classList.remove('show'));
+if(el.secretModal) el.secretModal.addEventListener('click',e=>{if(e.target===el.secretModal)el.secretModal.classList.remove('show');});
+
+if(el.closeWinButton) el.closeWinButton.addEventListener('click',()=>el.winModal.classList.remove('show'));
+if(el.winModal) el.winModal.addEventListener('click',e=>{if(e.target===el.winModal)el.winModal.classList.remove('show');});
+
+if(el.instructionsButton) el.instructionsButton.addEventListener('click',()=>el.instructionsModal.classList.add('show'));
+if(el.closeInstructionsButton) el.closeInstructionsButton.addEventListener('click',()=>el.instructionsModal.classList.remove('show'));
+if(el.instructionsModal) el.instructionsModal.addEventListener('click',e=>{if(e.target===el.instructionsModal)el.instructionsModal.classList.remove('show');});
+
+if(el.closeConditionButton) el.closeConditionButton.addEventListener('click',()=>el.conditionModal.classList.remove('show'));
+if(el.conditionModal) el.conditionModal.addEventListener('click',e=>{if(e.target===el.conditionModal)el.conditionModal.classList.remove('show');});
+
+if(el.startButton) el.startButton.addEventListener('click',()=>{
+ closeTutorial();
+ startGame();
+});
+if(el.nextButton) el.nextButton.addEventListener('click',nextGeneration);
+if(el.gardenButton) el.gardenButton.addEventListener('click',garden);
+if(el.resetButton) el.resetButton.addEventListener('click',resetGame);
+
+if(el.toggleTimeline) el.toggleTimeline.addEventListener('click',()=>el.timelineContent.classList.toggle('open'));
+
+if(el.newChallengeButton){
+ el.newChallengeButton.addEventListener('click',newChallenge);
+}
+
+if(el.dataAnalysisButton){
+ el.dataAnalysisButton.addEventListener('click',()=>setDataOpen(el.dataContent.style.display==='none'));
+}
+if(el.floatingDataButton){
+ el.floatingDataButton.addEventListener('click',()=>setDataOpen(el.dataContent.style.display==='none'));
+}
+if(el.toggleData){
+ el.toggleData.addEventListener('click',()=>setDataOpen(el.dataContent.style.display==='none'));
+}
+if(el.replayButton){
+ el.replayButton.addEventListener('click',newChallenge);
+}
+
+
+if(el.closeExtinctionButton){
+ el.closeExtinctionButton.addEventListener('click',()=>el.extinctionOverlay.classList.remove('show'));
+}
+
+document.querySelectorAll('.whyButton').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+   const target=document.getElementById(btn.dataset.target);
+   if(target) target.classList.toggle('open');
+ });
+});
+
+if(el.copyResultButton){
+ el.copyResultButton.addEventListener('click',async()=>{
+   try{
+     await navigator.clipboard.writeText(el.resultCode.textContent);
+     el.copyResultButton.textContent='Copied!';
+     setTimeout(()=>el.copyResultButton.textContent='Copy Result Code',1200);
+   }catch(e){
+     alert('Copy failed. You can manually select and copy the result code.');
+   }
+ });
+}
+
+window.addEventListener('scroll',compactStickyBarOnScroll);
+
 resetGame();
+document.body.classList.remove('analysisMode');
 window.addEventListener('load',()=>setTimeout(openTutorial,250));
 </script>
 </body>
