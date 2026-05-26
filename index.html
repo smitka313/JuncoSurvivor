@@ -296,6 +296,18 @@ body:not(.analysisMode) .analysisPanel{
 .progressiveHidden{display:none}
 body.gameStarted .progressiveHidden{display:block}
 
+
+.tokenTradeoff{
+  margin-top:6px;
+  padding:7px 9px;
+  border-radius:10px;
+  background:#fff0ec;
+  border-left:5px solid var(--red);
+  color:#8d2a1f;
+  font-size:.8rem;
+  font-weight:900;
+}
+
 </style>
 </head>
 <body>
@@ -346,7 +358,7 @@ body.gameStarted .progressiveHidden{display:block}
         <li>Privately reveal each team objective.</li>
         <li>Choose or keep strategies for each habitat.</li>
         <li>Run generations and watch resources, population mood, badges, and data.</li>
-        <li>At the end, compare results to secret objectives and explain the science.</li>
+        <li>Use intervention tokens only when necessary. They add +2 to a resource, but cost -1 Energy and raise CORT by +1.</li><li>At the end, compare results to secret objectives and explain the science.</li>
       </ol>
     </div>
   </div>
@@ -458,10 +470,10 @@ body.gameStarted .progressiveHidden{display:block}
 
 <div class="resourceBox">
   <b>🧰 Urban Intervention Tokens</b>
-  <p class="tiny">Use only when needed. Each token can only be used once.</p>
+  <p class="tiny">Use only when needed. Each token can only be used once.</p><div class="tokenTradeoff">Tradeoff: using a token costs -1 Energy and raises CORT by +1.</div>
   <div class="tokenBar">
-    <button type="button" class="tokenBtn blue interventionBtn" data-team="ucsd" data-effect="food">🍎 Emergency Food</button>
-    <button type="button" class="tokenBtn purple interventionBtn" data-team="ucsd" data-effect="safety">🛡 Increase Safety</button>
+    <button type="button" class="tokenBtn blue interventionBtn" data-team="ucsd" data-effect="food">🍎 Emergency Food (+2)</button>
+    <button type="button" class="tokenBtn purple interventionBtn" data-team="ucsd" data-effect="safety">🛡 Increase Safety (+2)</button>
   </div>
   <div id="uTokenCount" class="tiny">Tokens remaining: 2</div>
 </div>
@@ -491,10 +503,10 @@ body.gameStarted .progressiveHidden{display:block}
 
 <div class="resourceBox">
   <b>🧰 Mt. Laguna Intervention Tokens</b>
-  <p class="tiny">Use only when needed. Each token can only be used once.</p>
+  <p class="tiny">Use only when needed. Each token can only be used once.</p><div class="tokenTradeoff">Tradeoff: using a token costs -1 Energy and raises CORT by +1.</div>
   <div class="tokenBar">
-    <button type="button" class="tokenBtn blue interventionBtn" data-team="laguna" data-effect="food">🍎 Emergency Food</button>
-    <button type="button" class="tokenBtn purple interventionBtn" data-team="laguna" data-effect="safety">🛡 Increase Cover</button>
+    <button type="button" class="tokenBtn blue interventionBtn" data-team="laguna" data-effect="food">🍎 Emergency Food (+2)</button>
+    <button type="button" class="tokenBtn purple interventionBtn" data-team="laguna" data-effect="safety">🛡 Increase Cover (+2)</button>
   </div>
   <div id="mTokenCount" class="tiny">Tokens remaining: 2</div>
 </div>
@@ -729,10 +741,20 @@ function useIntervention(team,effect){
  state.tokens[team]--;
 
  if(effect==='food'){
-   state.resources[team].food=clamp(state.resources[team].food+4,0,20);
+   state.resources[team].food=clamp(state.resources[team].food+2,0,20);
  }
  if(effect==='safety'){
-   state.resources[team].safety=clamp(state.resources[team].safety+4,0,20);
+   state.resources[team].safety=clamp(state.resources[team].safety+2,0,20);
+ }
+
+ // Tradeoff: interventions help, but they are stressful and cost energy.
+ state.resources[team].energy=clamp(state.resources[team].energy-1,0,20);
+ if(team==='ucsd'){
+   state.ucsd.cort=clamp(state.ucsd.cort+1,0,30);
+   set('uStrategyEffect','Intervention used: resource support helped, but energy dropped by 1 and CORT rose by 1.');
+ }else{
+   state.laguna.cort=clamp(state.laguna.cort+1,0,30);
+   set('mStrategyEffect','Intervention used: resource support helped, but energy dropped by 1 and CORT rose by 1.');
  }
 
  set(team==='ucsd'?'uTokenCount':'mTokenCount','Tokens remaining: '+state.tokens[team]);
