@@ -335,6 +335,19 @@ body.gameStarted .progressiveHidden{display:block}
   background:#e8f4e6;
 }
 
+
+.resultGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
+@media(max-width:760px){.resultGrid{grid-template-columns:1fr}}
+.resultCard{background:#fff;border:2px solid rgba(0,0,0,.1);border-radius:16px;padding:12px}
+.resultCard h3{margin-top:0}
+.resultStatus{font-weight:1000;font-size:1.05rem;margin:6px 0;padding:7px 9px;border-radius:12px}
+.winSuccess{border-left:8px solid #237a3b}
+.winSuccess .resultStatus{background:#e9f7ed;color:#176b2a}
+.winFail{border-left:8px solid #c64c3b}
+.winFail .resultStatus{background:#fff0ec;color:#8d2a1f}
+.resultCard ul{margin:6px 0 0 20px;padding:0}
+.costTable th:nth-child(5),.costTable td:nth-child(5){background:#f8fbff}
+
 </style>
 </head>
 <body>
@@ -493,7 +506,7 @@ body.gameStarted .progressiveHidden{display:block}
         <div id="uCollapseWarning" class="collapseWarning hidden">⚠️ Urban UCSD resource crisis!</div>
       </div>
       <div class="choice"><b>Urban UCSD Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="uChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button type="button" class="gold strategy" data-team="ucsd" data-choice="bold">Forage near humans</button><button type="button" class="blue strategy" data-team="ucsd" data-choice="mixed">Balanced exploration</button><button type="button" class="purple strategy" data-team="ucsd" data-choice="safe">Hide and wait</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">⚠️ Risk</span><span class="previewTag neutral">🧬 Alleles</span></div>
-        <div class="choiceCostKey"><h4>Urban Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th></tr><tr><td>Forage</td><td class="costGood">+2</td><td class="costBad">-2</td><td class="costBad">-1</td></tr><tr><td>Balanced</td><td>0</td><td class="costBad">-1</td><td>0</td></tr><tr><td>Hide</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td></tr></table></div>
+        <div class="choiceCostKey"><h4>Urban Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th><th>CORT</th></tr><tr><td>Forage</td><td class="costGood">+2</td><td class="costBad">-2</td><td class="costBad">-1</td><td class="costGood">-1</td></tr><tr><td>Balanced</td><td class="costGood">+1</td><td>0</td><td class="costGood">+1</td><td class="costGood">-1</td></tr><tr><td>Hide</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td><td class="costGood">-2</td></tr></table><p class="tiny"><strong>Urban biology:</strong> lower CORT helps birds tolerate humans and stay bold.</p></div>
       </div>
 
 <div class="resourceBox">
@@ -526,7 +539,7 @@ body.gameStarted .progressiveHidden{display:block}
         <div id="mCollapseWarning" class="collapseWarning hidden">⚠️ Mt. Laguna resource crisis!</div>
       </div>
       <div class="choice"><b>Mt. Laguna Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="mChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button type="button" class="gold strategy" data-team="laguna" data-choice="bold">Search open areas</button><button type="button" class="blue strategy" data-team="laguna" data-choice="mixed">Balanced foraging</button><button type="button" class="purple strategy" data-team="laguna" data-choice="safe">Stay near cover</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">🦅 Predators</span><span class="previewTag neutral">🛡️ Safety</span></div>
-        <div class="choiceCostKey"><h4>Mt. Laguna Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th></tr><tr><td>Open areas</td><td class="costGood">+1</td><td class="costBad">-2</td><td class="costBad">-2</td></tr><tr><td>Balanced</td><td>0</td><td class="costBad">-1</td><td class="costGood">+1</td></tr><tr><td>Cover</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td></tr></table></div>
+        <div class="choiceCostKey"><h4>Mt. Laguna Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th><th>CORT</th></tr><tr><td>Open areas</td><td class="costGood">+1</td><td class="costBad">-2</td><td class="costBad">-2</td><td class="costGood">+2</td></tr><tr><td>Balanced</td><td class="costGood">+1</td><td>0</td><td class="costGood">+1</td><td class="costGood">+1</td></tr><tr><td>Cover</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td><td class="costBad">-2</td></tr></table><p class="tiny"><strong>Mt. Laguna biology:</strong> open areas raise alertness; cover lowers stress.</p></div>
       </div>
 
 <div class="resourceBox">
@@ -691,7 +704,16 @@ function showSecret(team){
  }
  el.secretModal.classList.add('show');
 }
-function strategyMod(choice,habitat){if(habitat==='ucsd'){if(choice==='bold')return{bold:1.12,shy:.94,alleleBias:2,food:2,energy:-2,safety:-1,msg:'Risky urban foraging gained food but cost energy and safety.'};if(choice==='safe')return{bold:.94,shy:1.02,alleleBias:-1,food:-1,energy:1,safety:2,msg:'Hiding saved energy and safety but reduced food access.'};return{bold:1.03,shy:1,alleleBias:0,food:0,energy:-1,safety:0,msg:'Balanced exploration had moderate costs and benefits.'};}if(choice==='safe')return{bold:.94,shy:1.12,alleleBias:-2,food:-1,energy:1,safety:2,msg:'Staying near cover improved safety, restored some energy, but reduced food.'};if(choice==='bold')return{bold:1.03,shy:.94,alleleBias:1,food:1,energy:-2,safety:-2,msg:'Searching open areas found food but increased predator risk.'};return{bold:1,shy:1.03,alleleBias:0,food:0,energy:-1,safety:1,msg:'Balanced foraging protected some safety with moderate energy cost.'};}
+function strategyMod(choice,habitat){
+ if(habitat==='ucsd'){
+   if(choice==='bold')return{bold:1.12,shy:.94,alleleBias:2,food:2,energy:-2,safety:-1,cort:-1,msg:'Foraging gained food and favored bold urban birds, but it cost energy and safety. CORT decreased slightly as urban birds tolerated human activity.'};
+   if(choice==='safe')return{bold:.94,shy:1.02,alleleBias:-1,food:-1,energy:1,safety:2,cort:-2,msg:'Hiding improved safety and recovery, but reduced food access. CORT decreased because birds avoided stressful exposure.'};
+   return{bold:1.03,shy:1,alleleBias:0,food:1,energy:0,safety:1,cort:-1,msg:'Balanced exploration gave modest food and safety benefits with stable energy. CORT decreased slightly in the urban environment.'};
+ }
+ if(choice==='safe')return{bold:.94,shy:1.12,alleleBias:-2,food:-1,energy:1,safety:2,cort:-2,msg:'Using cover improved safety and recovery, but reduced food access. CORT decreased because birds stayed protected.'};
+ if(choice==='bold')return{bold:1.03,shy:.94,alleleBias:1,food:1,energy:-2,safety:-2,cort:2,msg:'Searching open areas found food but increased predator exposure. CORT rose as birds became more alert and stressed.'};
+ return{bold:1,shy:1.03,alleleBias:0,food:1,energy:0,safety:1,cort:1,msg:'Balanced foraging gained food while maintaining some safety. CORT rose slightly because forest birds stayed alert.'};
+}
 function canAffordChoice(team,choice){const habitat=team==='ucsd'?'ucsd':'laguna';const r=state.resources[habitat];const cost=strategyMod(choice,habitat);return r.food+cost.food>=0&&r.energy+cost.energy>=0&&r.safety+cost.safety>=0;}
 function availableChoices(team){return['bold','mixed','safe'].filter(c=>canAffordChoice(team,c));}
 function markPopulationDead(team){if(team==='ucsd'){state.ucsd.bold=0;state.ucsd.shy=0;state.ucsd.cort=30;set('uChoiceWarning','No affordable choices remain. The Urban UCSD population has died out.');set('uEventTitle','Population collapse');set('uEventText','Urban UCSD ran out of resources and could no longer survive or reproduce.');}else{state.laguna.bold=0;state.laguna.shy=0;state.laguna.cort=30;set('mChoiceWarning','No affordable choices remain. The Mt. Laguna population has died out.');set('mEventTitle','Population collapse');set('mEventText','Mt. Laguna ran out of resources and could no longer survive or reproduce.');}}
@@ -776,7 +798,11 @@ function updateReport(){
  const first=state.history[0];
  const last=state.history[state.history.length-1];
 
- set('reportObjectives', evaluateSecretObjectives().replace(/\n/g,' '));
+ const objectiveResults=evaluateSecretObjectives();
+ set('reportObjectives',
+   `Urban UCSD: ${objectiveResults.urban.success?'achieved':'not achieved'} objective. ` +
+   `Mt. Laguna: ${objectiveResults.laguna.success?'achieved':'not achieved'} objective.`
+ );
 
  set('reportPopulation',
    `Urban population: ${first.ut} → ${last.ut}. Mt. Laguna population: ${first.mt} → ${last.mt}.`
@@ -949,61 +975,53 @@ function csvEscape(value){
 function buildFinalDataCsv(){
  const headers = [
    'Generation',
-   'Urban Bold',
-   'Urban Shy',
-   'Urban Total',
-   'Urban Percent Bold',
-   'Urban Bold Allele Percent',
+   'Urban % Bold',
    'Urban CORT',
-   'Urban Strategy',
-   'Mt Laguna Bold',
-   'Mt Laguna Shy',
-   'Mt Laguna Total',
-   'Mt Laguna Percent Bold',
-   'Mt Laguna Bold Allele Percent',
-   'Mt Laguna CORT',
-   'Mt Laguna Strategy',
-   'Urban Food',
-   'Urban Energy',
-   'Urban Safety',
-   'Mt Laguna Food',
-   'Mt Laguna Energy',
-   'Mt Laguna Safety',
+   'Urban Allele %',
+   'Mt. Laguna % Bold',
+   'Mt. Laguna CORT',
+   'Mt. Laguna Allele %',
    'Major Event'
  ];
 
- const rows = state.history.map(r => [
-   r.gen, r.ub, r.us, r.ut, r.up, r.ua, r.uc, r.uch,
-   r.mb, r.ms, r.mt, r.mp, r.ma, r.mc, r.mch,
-   r.uFood, r.uEnergy, r.uSafety, r.mFood, r.mEnergy, r.mSafety, r.majorEvent || 'None'
- ]);
+ const rows = state.history
+   .filter(r => r.gen > 0)
+   .map(r => [
+     r.gen,
+     r.up,
+     r.uc,
+     r.ua,
+     r.mp,
+     r.mc,
+     r.ma,
+     r.majorEvent || 'None'
+   ]);
 
- return [headers, ...rows].map(row => row.map(csvEscape).join(',')).join('\\n');
+ return [headers,...rows]
+   .map(row => row.map(csvEscape).join(','))
+   .join('\r\n');
 }
 
 function exportFinalDataCsv(){
- if(!state.history || state.history.length===0){
-   alert('Start the game first so there is data to export.');
+ if(!state.history || state.history.filter(r=>r.gen>0).length===0){
+   alert('Run at least one generation first. Generation 0 is not included in the student CSV.');
    return;
  }
 
  const csv = buildFinalDataCsv();
- const filename = 'junco_survivor_final_data_generation_' + state.gen + '.csv';
+ const filename = 'junco_survivor_student_data_generation_' + state.gen + '.csv';
 
  try{
-   const blob = new Blob(['\\ufeff' + csv], {type:'text/csv;charset=utf-8;'});
-   const url = URL.createObjectURL(blob);
+   // Data URI works more reliably from a local HTML file in many school/browser settings.
+   const csvWithBom = '\ufeff' + csv;
+   const dataUrl = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvWithBom);
    const a = document.createElement('a');
-   a.href = url;
+   a.href = dataUrl;
    a.download = filename;
    a.style.display = 'none';
    document.body.appendChild(a);
    a.click();
-
-   setTimeout(()=>{
-     URL.revokeObjectURL(url);
-     a.remove();
-   }, 500);
+   a.remove();
 
    if(el.exportCsvButton){
      const oldText = el.exportCsvButton.textContent;
@@ -1012,20 +1030,114 @@ function exportFinalDataCsv(){
    }
    if(el.csvStatus) set('csvStatus','CSV export started. Check your Downloads folder.');
  }catch(error){
-   const dataUrl = 'data:text/csv;charset=utf-8,' + encodeURIComponent('\\ufeff' + csv);
-   const fallback = window.open(dataUrl, '_blank');
-   if(!fallback){
+   try{
+     const blob = new Blob(['\ufeff' + csv], {type:'text/csv;charset=utf-8;'});
+     const url = URL.createObjectURL(blob);
+     const a = document.createElement('a');
+     a.href = url;
+     a.download = filename;
+     a.style.display = 'none';
+     document.body.appendChild(a);
+     a.click();
+     setTimeout(()=>{
+       URL.revokeObjectURL(url);
+       a.remove();
+     },500);
+     if(el.csvStatus) set('csvStatus','CSV export started using backup download method.');
+   }catch(secondError){
      navigator.clipboard?.writeText(csv);
      alert('Download was blocked. The CSV data was copied to the clipboard instead.');
    }
  }
 }
 
+function display(){set('genLabel','Generation '+state.gen);[['u',state.ucsd],['m',state.laguna]].forEach(([p,pop])=>{set(p+'Bold',pop.bold);set(p+'Shy',pop.shy);set(p+'Total',pop.bold+pop.shy);set(p+'Percent',pctBold(pop)+'%');set(p+'Allele',pop.allele+'%');set(p+'Cort',pop.cort);el[p+'AlleleFill'].style.width=pop.allele+'%';el[p+'CortFill'].style.width=(pop.cort/30*100)+'%';});set('uFoodResource',state.resources.ucsd.food);set('uEnergyResource',state.resources.ucsd.energy);set('uSafetyResource',state.resources.ucsd.safety);set('mFoodResource',state.resources.laguna.food);set('mEnergyResource',state.resources.laguna.energy);set('mSafetyResource',state.resources.laguna.safety);set('uTokenCount','Tokens remaining: '+state.tokens.ucsd);set('mTokenCount','Tokens remaining: '+state.tokens.laguna);el.uFoodFill.style.width=(state.resources.ucsd.food/20*100)+'%';el.uEnergyFill.style.width=(state.resources.ucsd.energy/20*100)+'%';el.uSafetyFill.style.width=(state.resources.ucsd.safety/20*100)+'%';el.mFoodFill.style.width=(state.resources.laguna.food/20*100)+'%';el.mEnergyFill.style.width=(state.resources.laguna.energy/20*100)+'%';el.mSafetyFill.style.width=(state.resources.laguna.safety/20*100)+'%';el.dataBody.innerHTML=state.history.filter(r=>r.gen>0).map(r=>`<tr><td>${r.gen}</td><td>${r.ub}</td><td>${r.us}</td><td>${r.ut}</td><td>${r.up}%</td><td>${r.ua}%</td><td>${r.uc}</td><td>${r.uch}</td><td>${r.mb}</td><td>${r.ms}</td><td>${r.mt}</td><td>${r.mp}%</td><td>${r.ma}%</td><td>${r.mc}</td><td>${r.mch}</td><td>${r.uFood}</td><td>${r.uEnergy}</td><td>${r.uSafety}</td><td>${r.mFood}</td><td>${r.mEnergy}</td><td>${r.mSafety}</td><td>${r.majorEvent||'None'}</td></tr>`).join('');const max=Math.max(1,...state.history.map(r=>Math.max(r.ub,r.us,r.ua*4,r.uc*8)));el.barArea.innerHTML=state.history.map(r=>`<div class="barGroup"><div class="bar boldBar" style="height:${r.ub/max*100}%"></div><div class="bar shyBar" style="height:${r.us/max*100}%"></div><div class="bar alleleBar" style="height:${r.ua*4/max*100}%"></div><div class="bar cortBar" style="height:${r.uc*8/max*100}%"></div></div>`).join('');enforceChoiceAvailability();document.querySelectorAll('.strategy').forEach(btn=>btn.classList.toggle('selected',state.choices[btn.dataset.team]===btn.dataset.choice));el.uBirdIcons.textContent=birdString(state.ucsd.bold,state.ucsd.shy);el.mBirdIcons.textContent=birdString(state.laguna.bold,state.laguna.shy);checkBadges();updateBadges();checkCollapse();updateComparisonTable();const cor=calculateCorrelation();set('correlationText',cor.label);set('correlationExplanation',cor.explanation);drawScatter(cor);updateMood();updateQuickSummary();updateMomentum();applyChoiceHints();updateReport();updateDebrief();updateStatusChips();updateGenerationHero();updateSmartBar();addTrendArrows();}
+function evaluateSecretObjectives(){
+ const start=state.history.length?state.history[0]:null;
+ if(!start)return{urban:{success:false,text:'No starting data was recorded.',evidence:[]},laguna:{success:false,text:'No starting data was recorded.',evidence:[]}};
 
-function display(){set('genLabel','Generation '+state.gen);[['u',state.ucsd],['m',state.laguna]].forEach(([p,pop])=>{set(p+'Bold',pop.bold);set(p+'Shy',pop.shy);set(p+'Total',pop.bold+pop.shy);set(p+'Percent',pctBold(pop)+'%');set(p+'Allele',pop.allele+'%');set(p+'Cort',pop.cort);el[p+'AlleleFill'].style.width=pop.allele+'%';el[p+'CortFill'].style.width=(pop.cort/30*100)+'%';});set('uFoodResource',state.resources.ucsd.food);set('uEnergyResource',state.resources.ucsd.energy);set('uSafetyResource',state.resources.ucsd.safety);set('mFoodResource',state.resources.laguna.food);set('mEnergyResource',state.resources.laguna.energy);set('mSafetyResource',state.resources.laguna.safety);set('uTokenCount','Tokens remaining: '+state.tokens.ucsd);set('mTokenCount','Tokens remaining: '+state.tokens.laguna);el.uFoodFill.style.width=(state.resources.ucsd.food/20*100)+'%';el.uEnergyFill.style.width=(state.resources.ucsd.energy/20*100)+'%';el.uSafetyFill.style.width=(state.resources.ucsd.safety/20*100)+'%';el.mFoodFill.style.width=(state.resources.laguna.food/20*100)+'%';el.mEnergyFill.style.width=(state.resources.laguna.energy/20*100)+'%';el.mSafetyFill.style.width=(state.resources.laguna.safety/20*100)+'%';el.dataBody.innerHTML=state.history.map(r=>`<tr><td>${r.gen}</td><td>${r.ub}</td><td>${r.us}</td><td>${r.ut}</td><td>${r.up}%</td><td>${r.ua}%</td><td>${r.uc}</td><td>${r.uch}</td><td>${r.mb}</td><td>${r.ms}</td><td>${r.mt}</td><td>${r.mp}%</td><td>${r.ma}%</td><td>${r.mc}</td><td>${r.mch}</td><td>${r.uFood}</td><td>${r.uEnergy}</td><td>${r.uSafety}</td><td>${r.mFood}</td><td>${r.mEnergy}</td><td>${r.mSafety}</td><td>${r.majorEvent||'None'}</td></tr>`).join('');const max=Math.max(1,...state.history.map(r=>Math.max(r.ub,r.us,r.ua*4,r.uc*8)));el.barArea.innerHTML=state.history.map(r=>`<div class="barGroup"><div class="bar boldBar" style="height:${r.ub/max*100}%"></div><div class="bar shyBar" style="height:${r.us/max*100}%"></div><div class="bar alleleBar" style="height:${r.ua*4/max*100}%"></div><div class="bar cortBar" style="height:${r.uc*8/max*100}%"></div></div>`).join('');enforceChoiceAvailability();document.querySelectorAll('.strategy').forEach(btn=>btn.classList.toggle('selected',state.choices[btn.dataset.team]===btn.dataset.choice));el.uBirdIcons.textContent=birdString(state.ucsd.bold,state.ucsd.shy);el.mBirdIcons.textContent=birdString(state.laguna.bold,state.laguna.shy);checkBadges();updateBadges();checkCollapse();updateComparisonTable();const cor=calculateCorrelation();set('correlationText',cor.label);set('correlationExplanation',cor.explanation);drawScatter(cor);updateMood();updateQuickSummary();updateMomentum();applyChoiceHints();updateReport();updateDebrief();updateStatusChips();updateGenerationHero();updateSmartBar();addTrendArrows();}
-function evaluateSecretObjectives(){const start=state.history.length?state.history[0]:null;if(!start)return'No starting data was recorded.';const urbanTotal=state.ucsd.bold+state.ucsd.shy,lagunaTotal=state.laguna.bold+state.laguna.shy,urbanBold=pctBold(state.ucsd),lagunaBold=pctBold(state.laguna);function urbanObjectiveMet(){switch(state.secretObjectives.urban.type){case'urban_bold_low_cort':return urbanBold>=70&&state.ucsd.cort<=14&&urbanTotal>start.ut;case'urban_allele_cort':return state.ucsd.allele>=70&&state.ucsd.cort<state.laguna.cort;case'urban_food_bold':return state.resources.ucsd.food>=8&&state.ucsd.bold>state.ucsd.shy;case'urban_city_specialist':return urbanBold>=65&&!state.collapsed;case'urban_low_stress':return state.ucsd.cort<=13&&urbanTotal>=20;default:return false;}}function lagunaObjectiveMet(){switch(state.secretObjectives.laguna.type){case'laguna_safety_shy':return state.resources.laguna.safety>=8&&state.laguna.shy>=state.laguna.bold;case'laguna_balanced_bold':return lagunaBold>=30&&lagunaBold<=55&&!state.collapsed;case'laguna_cover':return state.resources.laguna.safety>state.resources.laguna.food&&lagunaTotal>start.mt;case'laguna_predator_survivor':return state.laguna.shy>state.laguna.bold&&state.laguna.cort<23;case'laguna_stable_forest':return!state.collapsed&&state.resources.laguna.safety>=10&&state.laguna.allele<=55;default:return false;}}const u=urbanObjectiveMet(),m=lagunaObjectiveMet();return (u?'✅ Urban UCSD succeeded. ':'❌ Urban UCSD did not complete its objective. ')+state.secretObjectives.urban.text+'\\n\\n'+(m?'✅ Mt. Laguna succeeded. ':'❌ Mt. Laguna did not complete its objective. ')+state.secretObjectives.laguna.text;}
-function showWin(message){set('winText',message);el.winModal.classList.add('show');}
+ const urbanTotal=state.ucsd.bold+state.ucsd.shy;
+ const lagunaTotal=state.laguna.bold+state.laguna.shy;
+ const urbanBold=pctBold(state.ucsd);
+ const lagunaBold=pctBold(state.laguna);
 
+ function urbanObjectiveMet(){
+  switch(state.secretObjectives.urban.type){
+   case'urban_bold_low_cort':return urbanBold>=70&&state.ucsd.cort<=14&&urbanTotal>start.ut;
+   case'urban_allele_cort':return state.ucsd.allele>=70&&state.ucsd.cort<state.laguna.cort;
+   case'urban_food_bold':return state.resources.ucsd.food>=8&&state.ucsd.bold>state.ucsd.shy;
+   case'urban_city_specialist':return urbanBold>=65&&!state.collapsed;
+   case'urban_low_stress':return state.ucsd.cort<=13&&urbanTotal>=20;
+   default:return false;
+  }
+ }
+ function lagunaObjectiveMet(){
+  switch(state.secretObjectives.laguna.type){
+   case'laguna_safety_shy':return state.resources.laguna.safety>=8&&state.laguna.shy>=state.laguna.bold;
+   case'laguna_balanced_bold':return lagunaBold>=30&&lagunaBold<=55&&!state.collapsed;
+   case'laguna_cover':return state.resources.laguna.safety>state.resources.laguna.food&&lagunaTotal>start.mt;
+   case'laguna_predator_survivor':return state.laguna.shy>state.laguna.bold&&state.laguna.cort<23;
+   case'laguna_stable_forest':return!state.collapsed&&state.resources.laguna.safety>=10&&state.laguna.allele<=55;
+   default:return false;
+  }
+ }
+
+ return{
+  urban:{
+   success:urbanObjectiveMet(),
+   text:state.secretObjectives.urban.text,
+   evidence:[
+    `Final % bold: ${urbanBold}%`,
+    `Final CORT: ${state.ucsd.cort}`,
+    `Final allele frequency: ${state.ucsd.allele}%`,
+    `Final population: ${urbanTotal}`,
+    `Food/Energy/Safety: ${state.resources.ucsd.food}/${state.resources.ucsd.energy}/${state.resources.ucsd.safety}`
+   ]
+  },
+  laguna:{
+   success:lagunaObjectiveMet(),
+   text:state.secretObjectives.laguna.text,
+   evidence:[
+    `Final % bold: ${lagunaBold}%`,
+    `Final CORT: ${state.laguna.cort}`,
+    `Final allele frequency: ${state.laguna.allele}%`,
+    `Final population: ${lagunaTotal}`,
+    `Food/Energy/Safety: ${state.resources.laguna.food}/${state.resources.laguna.energy}/${state.resources.laguna.safety}`
+   ]
+  }
+ };
+}
+function showWin(results){
+ if(typeof results==='string'){
+  el.winText.textContent=results;
+  el.winModal.classList.add('show');
+  return;
+ }
+
+ const card=(label,result,icon)=>{
+  const status=result.success?'✅ Objective achieved':'❌ Objective not achieved';
+  const cls=result.success?'winSuccess':'winFail';
+  return `<div class="resultCard ${cls}">
+    <h3>${icon} ${label}</h3>
+    <div class="resultStatus">${status}</div>
+    <p><strong>Secret objective:</strong> ${result.text}</p>
+    <h4>Evidence to check:</h4>
+    <ul>${result.evidence.map(e=>`<li>${e}</li>`).join('')}</ul>
+    <p class="tiny">${result.success?'Use the evidence above to explain why your strategy worked.':'Use the evidence above to decide what you would change next time.'}</p>
+  </div>`;
+ };
+
+ el.winText.innerHTML =
+  `<h3>🏆 Secret Objective Results</h3>
+   <div class="resultGrid">
+    ${card('Urban UCSD',results.urban,'🏙️')}
+    ${card('Mt. Laguna',results.laguna,'🏔️')}
+   </div>
+   <div class="instructionCallout" style="margin-top:10px;">
+    <strong>Next step:</strong> Use your data table, graphs, and common garden analysis to explain what happened.
+   </div>`;
+ el.winModal.classList.add('show');
+}
 
 function setPreGameLocks(locked){
  const idsToLock = [
@@ -1169,7 +1281,7 @@ function reviewGenerationConditions(){
  el.conditionModal.classList.add('show');
 }
 
-function nextGeneration(){el.turnOverlay.classList.add('show');setTimeout(()=>el.turnOverlay.classList.remove('show'),650);if(state.gen>=state.maxGen)return;state.pressure=el.intensity.value;const uAvail=availableChoices('ucsd'),mAvail=availableChoices('laguna');if(uAvail.length===0)markPopulationDead('ucsd');if(mAvail.length===0)markPopulationDead('laguna');if(uAvail.length===0||mAvail.length===0){state.gen++;record();updateTimeline();display();if(el.gardenButton) el.gardenButton.disabled = false;el.winner.classList.remove('hidden');el.winner.textContent='At least one population died because no resource-supported choices remained.';if(state.gen>=state.maxGen||(uAvail.length===0&&mAvail.length===0))el.nextButton.disabled=true;return;}if(!canAffordChoice('ucsd',state.choices.ucsd))state.choices.ucsd=uAvail[0];if(!canAffordChoice('laguna',state.choices.laguna))state.choices.laguna=mAvail[0];updateResources();const ue=pick(urbanEvents),me=pick(mountainEvents),rare=Math.random()<0.22?pick(rareEvents):null;state.currentMajorEvent=rare?rare.name:'None';const ur=apply(state.ucsd,ue,'ucsd',state.choices.ucsd),mr=apply(state.laguna,me,'laguna',state.choices.laguna);applyRare(rare,ur,mr);state.ucsd=ur.next;state.laguna=mr.next;state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');state.gen++;set('conditionUrbanText',ue.title+': '+ue.text+' Selection pressure: '+ue.pressure+'.');set('conditionMountainText',me.title+': '+me.text+' Selection pressure: '+me.pressure+'.');if(rare){el.rareEventText.classList.remove('hidden');set('rareEventText',rare.name+': '+rare.text);}else{el.rareEventText.classList.add('hidden');set('rareEventText','');}updateTurnIdentity(rare);updateScenarioBanner(rare);renderImpactIndicators(rare);el.conditionModal.classList.add('show');set('roundConditionNote','🌦️ Generation '+state.gen+' conditions were applied. See popup, resources, badges, and outcome cards.');set('uEventTitle',ue.title);set('uEventText',ue.text+' Survivors reproduce and pass alleles to offspring.');set('mEventTitle',me.title);set('mEventText',me.text+' Survivors reproduce and pass alleles to offspring.');const uo=explain(state.ucsd,ur.old,state.choices.ucsd,ue,'ucsd'),mo=explain(state.laguna,mr.old,state.choices.laguna,me,'laguna');set('uPressure',uo.pressure);set('uStrategyEffect',uo.strategy);set('uPopulationEffect',uo.population);set('uGeneEffect',uo.genes);set('mPressure',mo.pressure);set('mStrategyEffect',mo.strategy);set('mPopulationEffect',mo.population);set('mGeneEffect',mo.genes);record();updateTimeline();display();if(el.gardenButton) el.gardenButton.disabled = false;focusCurrentGeneration();if(state.gen>=state.maxGen){el.nextButton.disabled=true;el.winner.classList.remove('hidden');el.winner.textContent='Game complete. Check secret objective results, badges, before/after evidence, and graphs.';showWin(evaluateSecretObjectives());celebrateWin();}}
+function nextGeneration(){el.turnOverlay.classList.add('show');setTimeout(()=>el.turnOverlay.classList.remove('show'),650);if(state.gen>=state.maxGen)return;state.pressure=el.intensity.value;const uAvail=availableChoices('ucsd'),mAvail=availableChoices('laguna');if(uAvail.length===0)markPopulationDead('ucsd');if(mAvail.length===0)markPopulationDead('laguna');if(uAvail.length===0||mAvail.length===0){state.gen++;record();updateTimeline();display();if(el.gardenButton) el.gardenButton.disabled = false;el.winner.classList.remove('hidden');el.winner.textContent='At least one population died because no resource-supported choices remained.';if(state.gen>=state.maxGen||(uAvail.length===0&&mAvail.length===0))el.nextButton.disabled=true;return;}if(!canAffordChoice('ucsd',state.choices.ucsd))state.choices.ucsd=uAvail[0];if(!canAffordChoice('laguna',state.choices.laguna))state.choices.laguna=mAvail[0];updateResources();const ue=pick(urbanEvents),me=pick(mountainEvents),rare=Math.random()<0.22?pick(rareEvents):null;state.currentMajorEvent=rare?rare.name:'None';const ur=apply(state.ucsd,ue,'ucsd',state.choices.ucsd),mr=apply(state.laguna,me,'laguna',state.choices.laguna);applyRare(rare,ur,mr);state.ucsd=ur.next;state.laguna=mr.next;state.ucsd.cort=clamp(cort(state.ucsd,'ucsd')+strategyMod(state.choices.ucsd,'ucsd').cort,3,30);state.laguna.cort=clamp(cort(state.laguna,'laguna')+strategyMod(state.choices.laguna,'laguna').cort,3,30);state.gen++;set('conditionUrbanText',ue.title+': '+ue.text+' Selection pressure: '+ue.pressure+'.');set('conditionMountainText',me.title+': '+me.text+' Selection pressure: '+me.pressure+'.');if(rare){el.rareEventText.classList.remove('hidden');set('rareEventText',rare.name+': '+rare.text);}else{el.rareEventText.classList.add('hidden');set('rareEventText','');}updateTurnIdentity(rare);updateScenarioBanner(rare);renderImpactIndicators(rare);el.conditionModal.classList.add('show');set('roundConditionNote','🌦️ Generation '+state.gen+' conditions were applied. See popup, resources, badges, and outcome cards.');set('uEventTitle',ue.title);set('uEventText',ue.text+' Survivors reproduce and pass alleles to offspring.');set('mEventTitle',me.title);set('mEventText',me.text+' Survivors reproduce and pass alleles to offspring.');const uo=explain(state.ucsd,ur.old,state.choices.ucsd,ue,'ucsd'),mo=explain(state.laguna,mr.old,state.choices.laguna,me,'laguna');set('uPressure',uo.pressure);set('uStrategyEffect',uo.strategy);set('uPopulationEffect',uo.population);set('uGeneEffect',uo.genes);set('mPressure',mo.pressure);set('mStrategyEffect',mo.strategy);set('mPopulationEffect',mo.population);set('mGeneEffect',mo.genes);record();updateTimeline();display();if(el.gardenButton) el.gardenButton.disabled = false;focusCurrentGeneration();if(state.gen>=state.maxGen){el.nextButton.disabled=true;el.winner.classList.remove('hidden');el.winner.textContent='Game complete. Check secret objective results, badges, before/after evidence, and graphs.';showWin(evaluateSecretObjectives());celebrateWin();}}
 function garden(){
  const uBold = clamp(Number(el.gardenUrbanPercentBold.value || 0),0,100);
  const uAllele = clamp(Number(el.gardenUrbanAllele.value || 0),0,100);
