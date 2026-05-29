@@ -312,6 +312,29 @@ body.gameStarted .progressiveHidden{display:block}
   cursor:not-allowed!important;
 }
 
+
+.gardenResult h4{
+  margin:10px 0 6px;
+  color:#0b5b2a;
+}
+.gardenResult p{
+  margin:6px 0;
+  line-height:1.35;
+}
+.gardenResult table{
+  width:100%;
+  border-collapse:collapse;
+  margin:6px 0 10px;
+}
+.gardenResult th,.gardenResult td{
+  border:1px solid rgba(0,0,0,.12);
+  padding:7px;
+  text-align:center;
+}
+.gardenResult th{
+  background:#e8f4e6;
+}
+
 </style>
 </head>
 <body>
@@ -525,27 +548,28 @@ body.gameStarted .progressiveHidden{display:block}
   <div id="roundConditionNote" class="gardenResult">🌦️ Generation 0: no condition changes yet.</div>
   <div id="momentumBanner" class="momentumBanner">Momentum bonuses will appear here.</div>
   
-<div class="gardenBox"><h3>🧪 Common Garden Experiment</h3>
+
+<div class="gardenBox" id="commonGardenSection"><h3>🧪 Common Garden Experiment</h3>
   <p class="small">
-    Enter common garden data and let the simulation analyze the result. In a common garden, both populations are tested under the same conditions.
-    This helps determine whether differences are likely inherited or mostly caused by the current environment.
+    Enter values from the data students recorded on paper. A common garden compares both populations under the same conditions.
+    Use the final generation data to decide whether differences may be inherited or mostly caused by the environment.
   </p>
 
   <div class="twoGrid">
     <div class="gardenCard">
-      <h4>Urban UCSD Birds in Same Conditions</h4>
-      <label for="gardenUrbanBold">Number showing bold/exploratory behavior</label>
-      <input id="gardenUrbanBold" type="number" min="0" value="0">
-      <label for="gardenUrbanTotal">Total Urban UCSD birds tested</label>
-      <input id="gardenUrbanTotal" type="number" min="1" value="10">
+      <h4>Urban UCSD Final Data</h4>
+      <label for="gardenUrbanPercentBold">Final Urban UCSD % Bold</label>
+      <input id="gardenUrbanPercentBold" type="number" min="0" max="100" value="0">
+      <label for="gardenUrbanAllele">Final Urban UCSD Allele %</label>
+      <input id="gardenUrbanAllele" type="number" min="0" max="100" value="0">
     </div>
 
     <div class="gardenCard">
-      <h4>Mt. Laguna Birds in Same Conditions</h4>
-      <label for="gardenLagunaBold">Number showing bold/exploratory behavior</label>
-      <input id="gardenLagunaBold" type="number" min="0" value="0">
-      <label for="gardenLagunaTotal">Total Mt. Laguna birds tested</label>
-      <input id="gardenLagunaTotal" type="number" min="1" value="10">
+      <h4>Mt. Laguna Final Data</h4>
+      <label for="gardenLagunaPercentBold">Final Mt. Laguna % Bold</label>
+      <input id="gardenLagunaPercentBold" type="number" min="0" max="100" value="0">
+      <label for="gardenLagunaAllele">Final Mt. Laguna Allele %</label>
+      <input id="gardenLagunaAllele" type="number" min="0" max="100" value="0">
     </div>
   </div>
 
@@ -554,8 +578,10 @@ body.gameStarted .progressiveHidden{display:block}
   </div>
 
   <div id="gardenResult" class="gardenResult">
-    Enter common garden data, then click <strong>Analyze Common Garden Data</strong>.
+    Enter final % Bold and final Allele % for both populations, then click <strong>Analyze Common Garden Data</strong>.
   </div>
+</div>
+
 </div>
 </div>
 </div></section>
@@ -603,7 +629,7 @@ body.gameStarted .progressiveHidden{display:block}
 </main>
 
 <script>
-const ids=['dataAnalysisButton','practiceButton','tutorialModal','tutorialProgress','prevTutorialButton','nextTutorialButton','finishTutorialButton','skipTutorialButton','instructionsButton','instructionsModal','closeInstructionsButton','secretModal','secretTitle','secretText','closeSecretButton','winModal','closeWinButton','winText','conditionModal','closeConditionButton','conditionUrbanText','conditionMountainText','rareEventText','impactIndicators','revealUrban','revealLaguna','generations','startBold','startShy','intensity','startButton','resetButton','nextButton','gardenButton','reviewConditionsButton','analyzeGardenButton','genLabel','uBold','uShy','uTotal','uPercent','uAllele','uCort','uAlleleFill','uCortFill','uEventTitle','uEventText','uBirdIcons','uChoiceWarning','uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mBold','mShy','mTotal','mPercent','mAllele','mCort','mAlleleFill','mCortFill','mEventTitle','mEventText','mBirdIcons','mChoiceWarning','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect','winner','uFoodResource','uEnergyResource','uSafetyResource','uFoodFill','uEnergyFill','uSafetyFill','uCollapseWarning','mFoodResource','mEnergyResource','mSafetyResource','mFoodFill','mEnergyFill','mSafetyFill','mCollapseWarning','badgeArea','dataBody','barArea','correlationText','correlationExplanation','cortScatter','gardenUrbanBold','gardenUrbanTotal','gardenLagunaBold','gardenLagunaTotal','gardenResult','roundConditionNote','comparisonBody','summaryUrban','summaryLaguna','summaryUrbanCort','summaryLagunaCort','uMood','mMood','toggleTimeline','timelineContent','timeline','turnOverlay','turnIdentity','momentumBanner','confetti','toggleData','dataContent','reportObjectives','reportPopulation','reportAlleles','reportSelection','newChallengeButton','scenarioBanner','urbanDebrief','lagunaDebrief','reactionAlert','uTokenCount','mTokenCount','extinctionOverlay','extinctionText','closeExtinctionButton','smartBarMessage','bigGenerationLabel','bigScenarioLabel','uStatusChips','mStatusChips','replayButton','floatingDataButton','exportCsvButton','check'];
+const ids=['dataAnalysisButton','practiceButton','tutorialModal','tutorialProgress','prevTutorialButton','nextTutorialButton','finishTutorialButton','skipTutorialButton','instructionsButton','instructionsModal','closeInstructionsButton','secretModal','secretTitle','secretText','closeSecretButton','winModal','closeWinButton','winText','conditionModal','closeConditionButton','conditionUrbanText','conditionMountainText','rareEventText','impactIndicators','revealUrban','revealLaguna','generations','startBold','startShy','intensity','startButton','resetButton','nextButton','gardenButton','reviewConditionsButton','analyzeGardenButton','genLabel','uBold','uShy','uTotal','uPercent','uAllele','uCort','uAlleleFill','uCortFill','uEventTitle','uEventText','uBirdIcons','uChoiceWarning','uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mBold','mShy','mTotal','mPercent','mAllele','mCort','mAlleleFill','mCortFill','mEventTitle','mEventText','mBirdIcons','mChoiceWarning','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect','winner','uFoodResource','uEnergyResource','uSafetyResource','uFoodFill','uEnergyFill','uSafetyFill','uCollapseWarning','mFoodResource','mEnergyResource','mSafetyResource','mFoodFill','mEnergyFill','mSafetyFill','mCollapseWarning','badgeArea','dataBody','barArea','correlationText','correlationExplanation','cortScatter','gardenUrbanPercentBold','gardenUrbanAllele','gardenLagunaPercentBold','gardenLagunaAllele','commonGardenSection','gardenResult','roundConditionNote','comparisonBody','summaryUrban','summaryLaguna','summaryUrbanCort','summaryLagunaCort','uMood','mMood','toggleTimeline','timelineContent','timeline','turnOverlay','turnIdentity','momentumBanner','confetti','toggleData','dataContent','reportObjectives','reportPopulation','reportAlleles','reportSelection','newChallengeButton','scenarioBanner','urbanDebrief','lagunaDebrief','reactionAlert','uTokenCount','mTokenCount','extinctionOverlay','extinctionText','closeExtinctionButton','smartBarMessage','bigGenerationLabel','bigScenarioLabel','uStatusChips','mStatusChips','replayButton','floatingDataButton','exportCsvButton','check'];
 const el={};ids.forEach(id=>{el[id]=document.getElementById(id); if(!el[id]) console.warn('Missing optional element:', id);});
 const set=(id,text)=>{if(el[id])el[id].textContent=text;};
 const labels={bold:'Bold/risky',mixed:'Mixed',safe:'Cautious/safe'};
@@ -1082,7 +1108,7 @@ function initializePreGameDisplay(){
  document.body.classList.remove('gameStarted');
 }
 
-function startGame(){state.gen=0;state.maxGen=Number(el.generations.value);state.pressure=el.intensity.value;const bold=Number(el.startBold.value),shy=Number(el.startShy.value),allele=clamp(bold/Math.max(bold+shy,1)*100,0,100);state.ucsd={bold,shy,allele,cort:0};state.laguna={bold,shy,allele,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.history=[];state.collapsed=false;state.currentMajorEvent='None';state.choices={ucsd:'mixed',laguna:'mixed'};if(!state.secretObjectives.urban.text||!state.secretObjectives.laguna.text)assignSecretObjectives();state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');el.winner.classList.add('hidden');el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'Run the next generation to collect evidence.'));set('gardenResult','Enter common garden data, then click Analyze Common Garden Data.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');if(el.impactIndicators) el.impactIndicators.innerHTML='<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';record();display();setPreGameLocks(false);el.nextButton.disabled=false;el.gardenButton.disabled=false;set('check','Game started.');}
+function startGame(){state.gen=0;state.maxGen=Number(el.generations.value);state.pressure=el.intensity.value;const bold=Number(el.startBold.value),shy=Number(el.startShy.value),allele=clamp(bold/Math.max(bold+shy,1)*100,0,100);state.ucsd={bold,shy,allele,cort:0};state.laguna={bold,shy,allele,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.history=[];state.collapsed=false;state.currentMajorEvent='None';state.choices={ucsd:'mixed',laguna:'mixed'};if(!state.secretObjectives.urban.text||!state.secretObjectives.laguna.text)assignSecretObjectives();state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');el.winner.classList.add('hidden');el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'Run the next generation to collect evidence.'));set('gardenResult','Enter final % Bold and final Allele % for both populations, then click Analyze Common Garden Data.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');if(el.impactIndicators) el.impactIndicators.innerHTML='<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';record();display();setPreGameLocks(false);el.nextButton.disabled=false;el.gardenButton.disabled=false;set('check','Game started.');}
 
 function updateTimeline(){
  const tl=el.timeline;
@@ -1145,40 +1171,88 @@ function reviewGenerationConditions(){
 
 function nextGeneration(){el.turnOverlay.classList.add('show');setTimeout(()=>el.turnOverlay.classList.remove('show'),650);if(state.gen>=state.maxGen)return;state.pressure=el.intensity.value;const uAvail=availableChoices('ucsd'),mAvail=availableChoices('laguna');if(uAvail.length===0)markPopulationDead('ucsd');if(mAvail.length===0)markPopulationDead('laguna');if(uAvail.length===0||mAvail.length===0){state.gen++;record();updateTimeline();display();if(el.gardenButton) el.gardenButton.disabled = false;el.winner.classList.remove('hidden');el.winner.textContent='At least one population died because no resource-supported choices remained.';if(state.gen>=state.maxGen||(uAvail.length===0&&mAvail.length===0))el.nextButton.disabled=true;return;}if(!canAffordChoice('ucsd',state.choices.ucsd))state.choices.ucsd=uAvail[0];if(!canAffordChoice('laguna',state.choices.laguna))state.choices.laguna=mAvail[0];updateResources();const ue=pick(urbanEvents),me=pick(mountainEvents),rare=Math.random()<0.22?pick(rareEvents):null;state.currentMajorEvent=rare?rare.name:'None';const ur=apply(state.ucsd,ue,'ucsd',state.choices.ucsd),mr=apply(state.laguna,me,'laguna',state.choices.laguna);applyRare(rare,ur,mr);state.ucsd=ur.next;state.laguna=mr.next;state.ucsd.cort=cort(state.ucsd,'ucsd');state.laguna.cort=cort(state.laguna,'laguna');state.gen++;set('conditionUrbanText',ue.title+': '+ue.text+' Selection pressure: '+ue.pressure+'.');set('conditionMountainText',me.title+': '+me.text+' Selection pressure: '+me.pressure+'.');if(rare){el.rareEventText.classList.remove('hidden');set('rareEventText',rare.name+': '+rare.text);}else{el.rareEventText.classList.add('hidden');set('rareEventText','');}updateTurnIdentity(rare);updateScenarioBanner(rare);renderImpactIndicators(rare);el.conditionModal.classList.add('show');set('roundConditionNote','🌦️ Generation '+state.gen+' conditions were applied. See popup, resources, badges, and outcome cards.');set('uEventTitle',ue.title);set('uEventText',ue.text+' Survivors reproduce and pass alleles to offspring.');set('mEventTitle',me.title);set('mEventText',me.text+' Survivors reproduce and pass alleles to offspring.');const uo=explain(state.ucsd,ur.old,state.choices.ucsd,ue,'ucsd'),mo=explain(state.laguna,mr.old,state.choices.laguna,me,'laguna');set('uPressure',uo.pressure);set('uStrategyEffect',uo.strategy);set('uPopulationEffect',uo.population);set('uGeneEffect',uo.genes);set('mPressure',mo.pressure);set('mStrategyEffect',mo.strategy);set('mPopulationEffect',mo.population);set('mGeneEffect',mo.genes);record();updateTimeline();display();if(el.gardenButton) el.gardenButton.disabled = false;focusCurrentGeneration();if(state.gen>=state.maxGen){el.nextButton.disabled=true;el.winner.classList.remove('hidden');el.winner.textContent='Game complete. Check secret objective results, badges, before/after evidence, and graphs.';showWin(evaluateSecretObjectives());celebrateWin();}}
 function garden(){
- const uBoldRaw = Number(el.gardenUrbanBold.value || 0);
- const uTotalRaw = Number(el.gardenUrbanTotal.value || 1);
- const mBoldRaw = Number(el.gardenLagunaBold.value || 0);
- const mTotalRaw = Number(el.gardenLagunaTotal.value || 1);
+ const uBold = clamp(Number(el.gardenUrbanPercentBold.value || 0),0,100);
+ const uAllele = clamp(Number(el.gardenUrbanAllele.value || 0),0,100);
+ const mBold = clamp(Number(el.gardenLagunaPercentBold.value || 0),0,100);
+ const mAllele = clamp(Number(el.gardenLagunaAllele.value || 0),0,100);
 
- const uTotal = Math.max(1, uTotalRaw);
- const mTotal = Math.max(1, mTotalRaw);
- const uBold = Math.min(Math.max(0, uBoldRaw), uTotal);
- const mBold = Math.min(Math.max(0, mBoldRaw), mTotal);
+ el.gardenUrbanPercentBold.value = uBold;
+ el.gardenUrbanAllele.value = uAllele;
+ el.gardenLagunaPercentBold.value = mBold;
+ el.gardenLagunaAllele.value = mAllele;
 
- el.gardenUrbanBold.value = uBold;
- el.gardenUrbanTotal.value = uTotal;
- el.gardenLagunaBold.value = mBold;
- el.gardenLagunaTotal.value = mTotal;
+ const behaviorDiff = Math.abs(uBold - mBold);
+ const alleleDiff = Math.abs(uAllele - mAllele);
 
- const uPercent = Math.round(uBold / uTotal * 100);
- const mPercent = Math.round(mBold / mTotal * 100);
- const diff = Math.abs(uPercent - mPercent);
-
+ let notice1 = '';
+ let notice2 = '';
+ let meaning = '';
  let conclusion = '';
- if(diff >= 15){
-   conclusion = 'The populations still behaved differently even under the same conditions. This supports the idea that at least some of the boldness difference may be inherited, not only caused by the current environment.';
+
+ if(behaviorDiff >= 15){
+   notice1 = uBold > mBold
+     ? 'Urban UCSD birds were much more bold than Mt. Laguna birds.'
+     : 'Mt. Laguna birds were much more bold than Urban UCSD birds.';
  }else{
-   conclusion = 'The populations behaved similarly under the same conditions. This suggests the current environment may have had a strong influence on behavior, or that inherited differences were smaller in this sample.';
+   notice1 = 'Both populations showed similar boldness levels.';
  }
 
- set('gardenResult',
-   `Common Garden Result: Urban UCSD = ${uPercent}% bold (${uBold}/${uTotal}). ` +
-   `Mt. Laguna = ${mPercent}% bold (${mBold}/${mTotal}). Difference = ${diff} percentage points. ` +
-   conclusion
- );
+ if(alleleDiff >= 10){
+   notice2 = uAllele > mAllele
+     ? 'Urban UCSD also had a higher boldness allele frequency.'
+     : 'Mt. Laguna also had a higher boldness allele frequency.';
+ }else{
+   notice2 = 'Both populations had similar allele frequencies.';
+ }
+
+ if(behaviorDiff >= 15 && alleleDiff >= 10){
+   meaning = 'Because both populations are being compared under the same conditions, the difference is probably not caused only by the environment. The allele difference suggests inherited traits may help explain the behavior difference.';
+   conclusion = 'Evidence supports the idea that boldness can be inherited.';
+ }else if(behaviorDiff >= 15 && alleleDiff < 10){
+   meaning = 'The populations behaved differently, but their allele frequencies were similar. This suggests the current environment or recent experiences may explain more of the behavior difference than inherited alleles.';
+   conclusion = 'Evidence for inherited boldness is weak in this run.';
+ }else if(behaviorDiff < 15 && alleleDiff >= 10){
+   meaning = 'The populations had different allele frequencies, but they behaved similarly in this common garden test. Genetic differences may exist, but they did not strongly change boldness in this trial.';
+   conclusion = 'More evidence would be needed before concluding that boldness was inherited.';
+ }else{
+   meaning = 'The populations were similar in both behavior and allele frequency. This suggests the original differences may have been mostly caused by environmental conditions, or that inherited differences were small in this run.';
+   conclusion = 'Evidence does not strongly support inherited boldness in this run.';
+ }
+
+ el.gardenResult.innerHTML =
+   `<h4>🧪 Common Garden Results</h4>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Population</th><th>% Bold</th><th>Allele %</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Urban UCSD</td><td>${uBold}%</td><td>${uAllele}%</td></tr>
+          <tr><td>Mt. Laguna</td><td>${mBold}%</td><td>${mAllele}%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>🔍 What Do We Notice?</h4>
+    <p>✅ ${notice1}</p>
+    <p>✅ ${notice2}</p>
+
+    <h4>💡 What Does This Mean?</h4>
+    <p>${meaning}</p>
+
+    <h4>🧠 Scientist Conclusion</h4>
+    <p><strong>${conclusion}</strong></p>`;
 }
 
-function resetGame(){state.gen=0;state.history=[];state.ucsd={bold:0,shy:0,allele:50,cort:0};state.laguna={bold:0,shy:0,allele:50,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.collapsed=false;state.currentMajorEvent='None';state.tokens={ucsd:2,laguna:2};state.choices={ucsd:'mixed',laguna:'mixed'};assignSecretObjectives();el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'After you run a generation, evidence will appear here.'));set('gardenResult','Enter common garden data, then click Analyze Common Garden Data.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');if(el.impactIndicators) el.impactIndicators.innerHTML='<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';el.winner.classList.add('hidden');el.nextButton.disabled=true;el.gardenButton.disabled=false;el.conditionModal.classList.remove('show');el.secretModal.classList.remove('show');el.winModal.classList.remove('show');document.body.classList.remove('gameStarted');display();if(el.uCollapseWarning)el.uCollapseWarning.classList.add('hidden');if(el.mCollapseWarning)el.mCollapseWarning.classList.add('hidden');if(el.gardenButton)el.gardenButton.disabled=false;set('check','Ready.');}
+function openCommonGarden(){
+ if(el.dataContent) el.dataContent.style.display='block';
+ document.body.classList.add('analysisMode');
+ if(el.dataAnalysisButton) el.dataAnalysisButton.textContent='📊 Hide Data Analysis';
+ if(el.floatingDataButton) el.floatingDataButton.textContent='❌ Close Data';
+ if(el.commonGardenSection) el.commonGardenSection.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetGame(){state.gen=0;state.history=[];state.ucsd={bold:0,shy:0,allele:50,cort:0};state.laguna={bold:0,shy:0,allele:50,cort:0};state.resources={ucsd:{food:10,energy:10,safety:10},laguna:{food:10,energy:10,safety:10}};state.badges=[];state.collapsed=false;state.currentMajorEvent='None';state.tokens={ucsd:2,laguna:2};state.choices={ucsd:'mixed',laguna:'mixed'};assignSecretObjectives();el.timeline.innerHTML='';set('uEventTitle','Generation 0: Starting population');set('mEventTitle','Generation 0: Starting population');set('uEventText','No habitat condition changes yet.');set('mEventText','No habitat condition changes yet.');['uPressure','uStrategyEffect','uPopulationEffect','uGeneEffect','mPressure','mStrategyEffect','mPopulationEffect','mGeneEffect'].forEach(id=>set(id,'After you run a generation, evidence will appear here.'));set('gardenResult','Enter final % Bold and final Allele % for both populations, then click Analyze Common Garden Data.');set('roundConditionNote','🌦️ Generation 0: no condition changes yet.');set('turnIdentity','🌦️ Generation 0: Stable starting conditions.');set('momentumBanner','Momentum bonuses will appear here.');if(el.impactIndicators) el.impactIndicators.innerHTML='<div class="impactTag impactNeutral">No rare disturbance this generation.</div>';el.winner.classList.add('hidden');el.nextButton.disabled=true;el.gardenButton.disabled=false;el.conditionModal.classList.remove('show');el.secretModal.classList.remove('show');el.winModal.classList.remove('show');document.body.classList.remove('gameStarted');display();if(el.uCollapseWarning)el.uCollapseWarning.classList.add('hidden');if(el.mCollapseWarning)el.mCollapseWarning.classList.add('hidden');if(el.gardenButton)el.gardenButton.disabled=false;set('check','Ready.');}
 
 
 document.querySelectorAll('.strategy').forEach(btn=>btn.addEventListener('click',()=>{
@@ -1221,7 +1295,7 @@ if(el.startButton) el.startButton.addEventListener('click',()=>{
  startGame();
 });
 if(el.nextButton) el.nextButton.addEventListener('click',nextGeneration);
-if(el.gardenButton) el.gardenButton.addEventListener('click',garden);
+if(el.gardenButton) el.gardenButton.addEventListener('click',openCommonGarden);
 if(el.reviewConditionsButton) el.reviewConditionsButton.addEventListener('click',reviewGenerationConditions);
 if(el.analyzeGardenButton) el.analyzeGardenButton.addEventListener('click',garden);
 if(el.exportCsvButton) el.exportCsvButton.addEventListener('click',exportFinalDataCsv);
