@@ -353,7 +353,7 @@ body.gameStarted .progressiveHidden{display:block}
 <body>
 <header>
   <h1>🐦 Junco Survivor: Adaptation Challenge</h1>
-  <p class="subtitle">A clean strategy game about natural selection, inherited boldness, allele frequency, CORT, resources, and survival.</p>
+  <p class="subtitle">A strategy game about natural selection, inherited boldness, allele frequency, CORT, resources, and survival.</p>
   <div class="topActions">
     <button type="button" id="practiceButton" class="instructionButton">🎮 Practice Round Guide</button>
     <button type="button" id="instructionsButton" class="instructionButton">📋 Student Instructions</button>
@@ -506,7 +506,7 @@ body.gameStarted .progressiveHidden{display:block}
         <div id="uCollapseWarning" class="collapseWarning hidden">⚠️ Urban UCSD resource crisis!</div>
       </div>
       <div class="choice"><b>Urban UCSD Strategy</b><p class="small">Strategies stay active. Choices that would push a resource below 0 lock.</p><div id="uChoiceWarning" class="small" style="font-weight:800;color:#8d2a1f;"></div><div class="buttons"><button type="button" class="gold strategy" data-team="ucsd" data-choice="bold">Forage near humans</button><button type="button" class="blue strategy" data-team="ucsd" data-choice="mixed">Balanced exploration</button><button type="button" class="purple strategy" data-team="ucsd" data-choice="safe">Hide and wait</button></div><div class="choicePreview"><span class="previewTag good">🍎 Food</span><span class="previewTag bad">⚠️ Risk</span><span class="previewTag neutral">🧬 Alleles</span></div>
-        <div class="choiceCostKey"><h4>Urban Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th><th>CORT</th></tr><tr><td>Forage</td><td class="costGood">+2</td><td class="costBad">-2</td><td class="costBad">-1</td><td class="costGood">-1</td></tr><tr><td>Balanced</td><td class="costGood">+1</td><td>0</td><td class="costGood">+1</td><td class="costGood">-1</td></tr><tr><td>Hide</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td><td class="costGood">-2</td></tr></table><p class="tiny"><strong>Urban biology:</strong> lower CORT helps birds tolerate humans and stay bold.</p></div>
+        <div class="choiceCostKey"><h4>Urban Cost Key</h4><table class="costTable"><tr><th>Choice</th><th>Food</th><th>Energy</th><th>Safety</th><th>CORT</th></tr><tr><td>Forage</td><td class="costGood">+2</td><td class="costBad">-2</td><td class="costBad">-1</td><td class="costBad">+1</td></tr><tr><td>Balanced</td><td class="costGood">+1</td><td>0</td><td class="costGood">+1</td><td class="costGood">-1</td></tr><tr><td>Hide</td><td class="costBad">-1</td><td class="costGood">+1</td><td class="costGood">+2</td><td class="costGood">-2</td></tr></table><p class="tiny"><strong>Urban biology:</strong> lower CORT helps birds tolerate humans and stay bold.</p></div>
       </div>
 
 <div class="resourceBox">
@@ -706,7 +706,7 @@ function showSecret(team){
 }
 function strategyMod(choice,habitat){
  if(habitat==='ucsd'){
-   if(choice==='bold')return{bold:1.12,shy:.94,alleleBias:2,food:2,energy:-2,safety:-1,cort:-1,msg:'Foraging gained food and favored bold urban birds, but it cost energy and safety. CORT decreased slightly as urban birds tolerated human activity.'};
+   if(choice==='bold')return{bold:1.12,shy:.94,alleleBias:2,food:2,energy:-2,safety:-1,cort:1,msg:'Foraging gained food and favored bold urban birds, but it cost energy and safety. CORT rose slightly because active foraging around humans is stressful.'};
    if(choice==='safe')return{bold:.94,shy:1.02,alleleBias:-1,food:-1,energy:1,safety:2,cort:-2,msg:'Hiding improved safety and recovery, but reduced food access. CORT decreased because birds avoided stressful exposure.'};
    return{bold:1.03,shy:1,alleleBias:0,food:1,energy:0,safety:1,cort:-1,msg:'Balanced exploration gave modest food and safety benefits with stable energy. CORT decreased slightly in the urban environment.'};
  }
